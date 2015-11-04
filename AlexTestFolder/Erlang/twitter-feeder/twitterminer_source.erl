@@ -1,9 +1,12 @@
 -module(twitterminer_source).
 
--export([twitter_example/2, split_transformer/0, decorate_with_id/1, twitter_print_pipeline/4, twitter_producer/4, get_account_keys/1]).
+-export([start/0, twitter_example/0, split_transformer/0, decorate_with_id/1, twitter_print_pipeline/2, twitter_producer/2, get_account_keys/1]).
 
 -record(account_keys, {api_key, api_secret,
                        access_token, access_token_secret}).
+-define(Celebrities,"Kim Kardashian, Cristiano Ronaldo").
+
+start() -> spawn (fun twitter_example/0).
 
 keyfind(Key, L) ->
   {Key, V} = lists:keyfind(Key, 1, L),
@@ -19,7 +22,7 @@ get_account_keys(Name) ->
                 access_token_secret=keyfind(access_token_secret, Keys)}.
 
 %% @doc This example will download a sample of tweets and print it.
-twitter_example(Celeb1, Celeb2) ->
+twitter_example() ->
   URL = "https://stream.twitter.com/1.1/statuses/filter.json",
 %https://api.twitter.com/1.1/statuses/user_timeline.json?q=Snooki
 %https://stream.twitter.com/1.1/statuses/sample.json
@@ -28,7 +31,7 @@ twitter_example(Celeb1, Celeb2) ->
   Keys = get_account_keys(account1),
 
   % Run our pipeline
-  P = twitterminer_pipeline:build_link(twitter_print_pipeline(URL, Keys, Celeb1, Celeb2)),
+  P = twitterminer_pipeline:build_link(twitter_print_pipeline(URL, Keys)),
   
   %register(miner, P),    %Cant register that...
 
@@ -48,9 +51,9 @@ twitter_example(Celeb1, Celeb2) ->
 
 %% @doc Create a pipeline that connects to twitter and
 %% prints tweets.
-twitter_print_pipeline(URL, Keys, Celeb1, Celeb2) ->
+twitter_print_pipeline(URL, Keys) ->
 
-  Prod = twitter_producer(URL, Keys, Celeb1, Celeb2),
+  Prod = twitter_producer(URL, Keys),
 
   % Pipelines are constructed 'backwards' - consumer is first, producer is last.
   [
@@ -63,14 +66,14 @@ twitter_print_pipeline(URL, Keys, Celeb1, Celeb2) ->
 
 %% @doc Create a pipeline producer that opens a connection
 %% to a Twitter streaming API endpoint.
-twitter_producer(URL, Keys, Celeb1, Celeb2) ->
+twitter_producer(URL, Keys) ->
   twitterminer_pipeline:producer(
-    fun receive_tweets/1, {init, URL, Keys, Celeb1, Celeb2}).
+    fun receive_tweets/1, {init, URL, Keys}).
 
 % receive_tweets is used as the producer stage of the pipeline.
 % Return values match those expected by twitterminer_pipeline:producer_loop/3.
 % It also has to handle the 'terminate' message.
-receive_tweets({init, URL, Keys, Celeb1, Celeb2}) ->
+receive_tweets({init, URL, Keys}) ->
 
   % Twitter streaming API requires a persistent HTTP connection with an infinite stream. 
   % HTTP has not really been made for that, and the only way of cancelling your request
@@ -94,7 +97,7 @@ receive_tweets({init, URL, Keys, Celeb1, Celeb2}) ->
   % I have never managed to receive a stall warning, but it would
   % be a good idea to handle them somehow (or at least log).
   SignedParams = oauth:sign("GET", URL,             %Added characters to mine for...
-  	[{delimited, length}, {language, en}, {track, list_to_atom(Celeb1 ++ " , " ++ Celeb2)},
+  	[{delimited, length}, {language, en}, {track, list_to_atom(?Celebrities)},
     {stall_warnings, true}], Consumer, AccessToken, AccessTokenSecret),
 
   % We use stream_to self() to get the HTTP stream delivered to our process as individual messages.
@@ -155,7 +158,7 @@ extract(K, L) ->
 % but does not have this safety issue.
 decorate_with_id(B) ->
   case jiffy:decode(B) of
-    {L} ->
+    {L} ->            %%---Might change to id_str---%%
       case lists:keyfind(<<"id">>, 1, L) of
         {_, I} -> {parsed_tweet, L, B, {id, I}};
         false  -> {parsed_tweet, L, B, no_id}
@@ -171,14 +174,7 @@ my_print(T) ->
         not_found -> ok
       end,
       case extract(<<"text">>, L) of				%%Loss of data here, as good as fixed...
-        {found, TT} -> 
-          case whereis(twitter_feeder) of
-            undefined -> 
-              twitterfeeder_source:start_link(),
-              twitter_feeder ! {tweet, TT};
-            _ -> 
-              twitter_feeder ! {tweet, TT}
-          end;
+        {found, TT} -> parser ! {TT};
           %io:format("Tweets: ~ts~n", [TT]);		%%--ADDED LINE BREAK PLUS FUN-CALL
         not_found -> ok
           %case extract(<<"delete">>, L) of

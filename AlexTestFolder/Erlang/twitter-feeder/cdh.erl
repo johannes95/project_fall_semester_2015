@@ -165,24 +165,38 @@ player(Name, {battle, HP}) ->
 
 % Receiving Method that takes in two names, spawns two processes with the two celebs and feeds the tweets
   test_kike(Celeb1, Celeb2) ->
+    register(receiver, spawn_link(fun() -> receiver_init(Celeb1, Celeb2) end)),
     start_link(),
     spawn_link(cdh, player, [Celeb1, new]),
-    spawn_link(cdh, player, [Celeb2, new]),
-    register(receiver, spawn_link(fun() -> receiver(Celeb1, Celeb2) end)).
+    spawn_link(cdh, player, [Celeb2, new]).
 
 % Receiver
+  receiver_init(Celeb1, Celeb2) ->
+    broadcaster ! {battle_server, register, self(), Celeb1, Celeb2},
+    receive
+      {ok, registered} -> ok
+    end,
+    receiver(Celeb1, Celeb2).
+    
   receiver (Celeb1, Celeb2) -> 
     receive
-      {terminate} -> ok;
-      {Pid, Tweet} -> 
-        case nameparser(Tweet, Celeb1) of
-          false -> 
-            case nameparser(Tweet, Celeb2) of
-              false -> Pid ! {unsuccessful, Tweet};
-              true -> battle_server ! {success, p2}, Pid ! {success}, receiver (Celeb1, Celeb2) % Celeb2 is the string.
-            end;
-          true -> battle_server ! {success, p1}, Pid ! {success}, receiver(Celeb1, Celeb2) % Celeb 1 is in the string.
-        end
+      {tweet, Celebrity, Tweet} -> 
+        case Celebrity of
+          Celeb1 -> 
+            bridge ! {Celeb1 ++ " hit " ++ Celeb2, Tweet}, 
+            battle_server ! {success, p1};
+          Celeb2 -> 
+            bridge ! {Celeb2 ++ " hit " ++ Celeb1, Tweet},
+            battle_server ! {success, p2};
+          _ -> ok
+        end,
+        receiver(Celeb1, Celeb2);
+      {terminate} ->
+        broadcaster ! {battle_server, unregister, self(), Celeb1, Celeb2},
+        receive
+          {ok, unregistered} -> ok
+        end;
+      _ -> ok
     end.
 
 % erl -pa deps/*/ebin -pa ebin -config twitterminer
@@ -191,15 +205,15 @@ player(Name, {battle, HP}) ->
 %Answers = [string:str(Tweet, Name) || Name <-Record (Celeb)]
 %evaluate if any[answers] >0
 
-nameparser(Tweet, Celeb) ->
+%nameparser(Tweet, Celeb) ->
 %  case io_lib:printable_list(Tweet) of
 %    true->
-      case Celeb of
-        "Cristiano Ronaldo" -> Tuple = ["cristiano", "ronaldo", "@cristiano", "@ronaldo"];
-        "Kim Kardashian" -> Tuple = ["kim", "kardashian", "@kim", "@kardashian"]
-      end,
-      Answer = [string:str(string:to_lower(Tweet), Alias) > 0 || Alias <- Tuple],
-      lists:member(true, Answer).
+      % case Celeb of
+      %   "Cristiano Ronaldo" -> Tuple = ["cristiano", "ronaldo", "@cristiano", "@ronaldo"];
+      %   "Kim Kardashian" -> Tuple = ["kim", "kardashian", "@kim", "@kardashian"]
+      % end,
+      % Answer = [string:str(string:to_lower(Tweet), Alias) > 0 || Alias <- Tuple],
+      % lists:member(true, Answer).
  %   false -> false
 %  end.
     
