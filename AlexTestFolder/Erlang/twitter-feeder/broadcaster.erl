@@ -33,10 +33,10 @@ broadcaster_loop(Listeners) ->
     {parser, Celebrity, Tweet} -> 
       [Pid ! {tweet, Celebrity, Tweet} || {Pid, C1, C2} <- Listeners, lists:member(Celebrity ,[C1, C2])],
       broadcaster_loop(Listeners);
-    {battle_server, register, Pid, C1, C2} ->
+    {register, Pid, C1, C2} ->
       Pid ! {ok, registered},
       broadcaster_loop([{Pid, C1, C2}|Listeners]);
-    {battle_server, unregister, Pid, C1, C2} ->
+    {unregister, Pid, C1, C2} ->
       Pid ! {ok, unregistered},
       broadcaster_loop(lists:delete({Pid, C1, C2}, Listeners));
     {terminate} ->
