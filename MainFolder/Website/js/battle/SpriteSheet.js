@@ -1,4 +1,12 @@
-function SpriteSheet(path, frameWidth, frameHeight, width, height, frameSpeed, endFrame) {
+// path = image source
+// framWidth = widht for each frame
+// frameHeight = height for each frame
+// width = desired width for drawed frame(usually same as frameWidth)
+// height = desired height for drawed frame(usually same as frameHeight)
+// frameSpeed = the desired speed for changing frame
+// endFrame = the last frame of the spritesheet(number of frames)
+
+function SpriteSheet(path, frameWidth, frameHeight, width, height, frameSpeed, endFrame, dead) {
  
    	var image = new Image();
    	var framesPerRow;
@@ -39,6 +47,7 @@ function SpriteSheet(path, frameWidth, frameHeight, width, height, frameSpeed, e
          	frameWidth, frameHeight,
          	x, y,
          	width, height);
+          
   	};
 
 }

@@ -1,7 +1,7 @@
 -module (broadcaster).
--export([broadcaster_sup_start_link/0]).
+-export([start/0]).
 
-broadcaster_sup_start_link() ->
+start() ->
   spawn_link(fun broadcaster_sup/0).
 
 broadcaster_sup() ->
@@ -39,6 +39,6 @@ broadcaster_loop(Listeners) ->
     {unregister, Pid, C1, C2} ->
       Pid ! {ok, unregistered},
       broadcaster_loop(lists:delete({Pid, C1, C2}, Listeners));
-    {terminate} ->
+    terminate ->
       ok
   end.

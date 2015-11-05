@@ -22,14 +22,12 @@ broadcast_unregister(Celeb1, Celeb2) ->
         {ok, unregistered} -> ok end.
 
 % Battle server: C1 == 0
-battle_loop(Session, C1, 0, C2, HP2) ->                
-    broadcast_unregister(C1, C2),
-    bridge ! {battle, Session, C1, 0, C2, HP2, c1dead};
+battle_loop(_Session, C1, 0, C2, _HP2) ->                
+    broadcast_unregister(C1, C2);
 
 % Battle server: C2 == 0 
-battle_loop(Session, C1, HP1, C2, 0) ->                
-    broadcast_unregister(C1, C2),
-    bridge ! {battle, Session, C1, HP1, C2, 0, c2dead};
+battle_loop(_Session, C1, _HP1, C2, 0) ->                
+    broadcast_unregister(C1, C2);
 
 % Battle server: Ongoing battle
 battle_loop(Session, Celeb1, HP1, Celeb2, HP2) ->
@@ -37,12 +35,14 @@ battle_loop(Session, Celeb1, HP1, Celeb2, HP2) ->
       {tweet, Celebrity, Tweet} -> 
         case Celebrity of
           Celeb1 -> 
-            bridge ! {battle, Session, Celeb1, HP1, Celeb2, HP2-1, c2damaged, Tweet}, 
+            bridge ! {battle, Session, Celeb1, HP1, HP2-1, Tweet}, 
             battle_loop(Session, Celeb1, HP1, Celeb2, HP2-1);
           Celeb2 -> 
-            bridge ! {battle, Session, Celeb1, HP1-1, Celeb2, HP2, c1damaged, Tweet},
+            bridge ! {battle, Session, Celeb2, HP1-1, HP2, Tweet},
             battle_loop(Session, Celeb1, HP1-1, Celeb2, HP2);
           _ -> 
             battle_loop(Session, Celeb1, HP1, Celeb2, HP2)
         end
     end.
+    
+    % spawn (fun () -> battle_module:start("kikedaddyo", "Kim Kardashian", 10, "Cristiano Ronaldo", 10) end).

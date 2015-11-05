@@ -63,10 +63,10 @@ urlmaker(String) ->
 
 
 
-
-
-
-
+send(Text) ->
+	NewText = urlmaker(Text),
+	ibrowse:send:req("https://celebritydeathhash-arnolf.c9.io/AlexTestFolder/test.php
+%	?TweetText="++NewText++
 
 
 

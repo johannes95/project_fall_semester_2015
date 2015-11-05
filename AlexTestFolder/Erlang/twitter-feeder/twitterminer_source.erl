@@ -174,8 +174,15 @@ my_print(T) ->
         not_found -> ok
       end,
       case extract(<<"text">>, L) of				%%Loss of data here, as good as fixed...
-        {found, TT} -> parser ! {TT};
+        {found, TT} -> 
+          %parser ! {unicode:characters_to_list(TT, utf8)};
+          parser ! {TT};
           %io:format("Tweets: ~ts~n", [TT]);		%%--ADDED LINE BREAK PLUS FUN-CALL
+          %Temp1 = unicode:characters_to_list(TT, utf8),
+          %Temp = lists:flatten(Temp1),
+          %Temp = io_lib:format("~s", Temp1),
+          %Temp = jiffy:decode(TT),
+          %io:format("Tweets: ~s~n",[Temp]);
         not_found -> ok
           %case extract(<<"delete">>, L) of
           %  {found, _} -> io:format("deleted: ~p~n", [L]);

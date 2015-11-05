@@ -14,7 +14,11 @@
         <script src="js/battle/Character.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/battle/Celebrity.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/battle/SpriteSheet.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/battle/CelebDatabase.js" type="text/javascript" charset="utf-8"></script>
         <canvas id="board"></canvas>
+        
+            <input id="hit1" type="button" value="Hit" />
+            <input id="hit2" type="button" value="Hit" />
 
 
 <?php 

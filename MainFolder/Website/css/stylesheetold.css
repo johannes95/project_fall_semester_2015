@@ -12,17 +12,6 @@ header{
     font-family: 'Indie Flower', cursive;
 }
 
-
-selection{
-    width:100%;
-    margin-left:120px;
-    font-size: 150%;
-    color:#696969;
-    float:left;
-    font-family: Century Gothic, sans-serif;
-}
-
-
 nav{
     width:90%;
     padding-left:5%;
@@ -87,26 +76,6 @@ nav{
     height:500px;
 }
 
-#hitBox {
-    width:100%;
-    height:auto;
-    background:#000;
-}
-
-#hit1 {
-    float:left;
-    margin-left:360px;
-    margin-right:auto;
-    margin-top:10px;
-}
-
-#hit2 {
-    float:left;
-    margin-left:360px;
-    margin-right:auto;
-    margin-top:10px;
-}
-
 #username {
     float:right;
     color:#fff;
@@ -118,15 +87,14 @@ nav{
 /* characters */
 
 #character-list{
-    width:69%;
+    width:66%;
     float:left;
     margin-left:3%;
     background:#ecf0f1;
-    padding:10px;
+    padding:15px;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;   
-    font-family: 'Indie Flower', cursive;
 }
 
 #character-cart{
