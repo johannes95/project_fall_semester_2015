@@ -17,3 +17,5 @@ On a terminal write mysql-ctl start
 then go to https://celebritydeathhash-arnolf.c9.io/phpmyadmin
 Username: arnolf
 password: blank (as in no password)
+
+testing push
