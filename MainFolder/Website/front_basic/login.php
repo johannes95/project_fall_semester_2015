@@ -27,35 +27,9 @@ if(isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_t
 		$name = explode(" ",$user_info->name);
 		$fname = isset($name[0])?$name[0]:'';
 		$lname = isset($name[1])?$name[1]:'';
+		$db_user = new Users();
+		$db_user->checkUser('twitter',$user_info->id,$user_info->screen_name,$fname,$lname,$user_info->lang,$access_token['oauth_token'],$access_token['oauth_token_secret'],$user_info->profile_image_url);
 		
-	
-		//Handle the DB in the other server.
-			$url = 'https://celebrity-database-arnolf.c9.io/Database/Users.php';
-			$fields = array(
-			    'userid' => $user_info->id,
-			    'username' => $user_info->screen_name,
-			    'access_token' => $access_token['oauth_token'],
-			    'access_secret' => $access_token['oauth_token_secret']
-			);
-	
-			//url-ify the data for the POST
-			foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-			rtrim($fields_string, '&');
-			
-			//open connection
-			$ch = curl_init();
-			
-			//set the url, number of POST vars, POST data
-			curl_setopt($ch,CURLOPT_URL, $url);
-			curl_setopt($ch,CURLOPT_POST, count($fields));
-			curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-			
-			//execute post
-			$result = curl_exec($ch);
-			
-			//close connection
-			curl_close($ch);
-
 		//Unset no longer needed request tokens
 		unset($_SESSION['token']);
 		unset($_SESSION['token_secret']);

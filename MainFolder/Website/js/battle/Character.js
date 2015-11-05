@@ -1,13 +1,17 @@
 var leftKey = 37, upKey = 38, rightKey = 39, downKey = 40, spaceBar = 32; // Storing the key codes(keymaster.js)
 
 /* Defines the character to be used by the user */
-function Character(x,y) {
+// x = starting x possition
+// y = starting y position
+// celebrity = selected celebrity
+// isPlayer = true if the character is controlled by the player of the game
+function Character(x,y,celebrity,isPlayer) {
     
     // Variable declaration for the character
     this.x = x;
     this.y = y;
-    this.width = 75;
-    this.height = 100;
+    this.width = celebrity.width;
+    this.height = celebrity.height;
     this.background = "black";
     this.shouldJump = true;
     this.jumping = false;
@@ -15,9 +19,9 @@ function Character(x,y) {
     this.jumpSpeed = 17;
     this.shouldPunch = false;
     this.isWalking = false;
-    this.spritesheetNormal = new SpriteSheet('img/sprites/Spritesheet-Kim-Kardashian-Normal.png', 75, 100, this.width, this.height, 4, 4);
-    this.spritesheetWalking = new SpriteSheet('img/sprites/Spritesheet-Kim-Kardashian-Walking.png', 75, 100, this.width, this.height, 4, 4);
-    this.spritesheetPunching= new SpriteSheet('img/sprites/Spritesheet-Kim-Kardashian-Punching.png', 75, 100, this.width, this.height, 2, 4);
+    this.spritesheetNormal = celebrity.spritesheetNormal;
+    this.spritesheetWalking = celebrity.spritesheetWalking;
+    this.spritesheetPunching = celebrity.spritesheetPunching;
     
     // Gets the context(board/canvas) and draws the character, with its attributes, on the context.
     this.draw = function(context) {
@@ -58,17 +62,8 @@ function Character(x,y) {
     	this.isWalking = false;
     	this.shouldPunch = false;
     	
-	   	if(key.isPressed(leftKey)) { 
-			this.x = this.x - 3;   				 // Move left (keymaster.js)
-			this.isWalking = true;
-	   	}
-		if(key.isPressed(rightKey)) {
-			this.x = this.x + 3;  				 // Move right
-			this.isWalking = true;
-		}
-
-		if(key.isPressed(upKey) && this.shouldJump)
-			this.jumping = true; 				 // Set the character to jump
+    	if(isPlayer)
+			this.checkKeys();
 		
 		if(this.jumping) { 						 // While jumping
 			
@@ -84,13 +79,7 @@ function Character(x,y) {
     		}
 			
 		}
-		
-		if(key.isPressed(spaceBar)) {
-			//Test to see if spacebar is working
-			//this.x = this.x + 3;
-			//this.isWalking = true;
-			this.shouldPunch = true;
-		}
+	
 		// End direction
 		
 		
@@ -122,6 +111,30 @@ function Character(x,y) {
 		// End limit
 		
 		
+    }
+    
+    this.checkKeys = function() {
+    	
+        if(key.isPressed(leftKey)) { 
+			this.x = this.x - 3;   				 // Move left (keymaster.js)
+			this.isWalking = true;
+	   	}
+		
+		if(key.isPressed(rightKey)) {
+			this.x = this.x + 3;  				 // Move right
+			this.isWalking = true;
+		}
+
+		if(key.isPressed(upKey) && this.shouldJump)
+			this.jumping = true; 				 // Set the character to jump
+			
+		if(key.isPressed(spaceBar)) {
+			//Test to see if spacebar is working
+			//this.x = this.x + 3;
+			//this.isWalking = true;
+			this.shouldPunch = true;
+		}
+    	
     }
     
     

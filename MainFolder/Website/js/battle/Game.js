@@ -2,12 +2,15 @@
 var board;
 var character, character2;
 var width = 300, height = 150;
+var chosenCelebrity, cpuCelebrity;
 
 window.onload = function() { 					  // Loads when the page(battle.html) loads
 	
 	board = document.getElementById("board"); 	  // Get the context to draw on, the html canvas reference(battle.html)
-	character = new Character(10,0); 			  // Initializes a character(Character.js)
-	character2 = new Character(200,0);
+	playerCelebrity = new KimKardashian();
+	cpuCelebrity = new Tmp();
+	character = new Character(10,0,playerCelebrity, true); 			  // Initializes a character(Character.js)
+	character2 = new Character(200,0,cpuCelebrity, false);
 	
 	//celebrity = new Celebrity(15,15);
 	

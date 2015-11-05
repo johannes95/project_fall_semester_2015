@@ -14,6 +14,7 @@
         <script src="js/battle/Character.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/battle/Celebrity.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/battle/SpriteSheet.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/battle/CelebDatabase.js" type="text/javascript" charset="utf-8"></script>
         <canvas id="board"></canvas>
 
 

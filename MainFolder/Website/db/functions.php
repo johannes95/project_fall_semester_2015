@@ -5,7 +5,7 @@ class Users {
 	function __construct(){
 		//Database configuration
 		$dbServer = getenv('IP'); //Define database server host
-		$dbUsername = getenv('arnolf'); //Define database username
+		$dbUsername = getenv('C9_USER'); //Define database username
 		$dbPassword = ''; //Define database password
 		$dbName = 'CelebDeath'; //Define database name
 		$dbport = 3306;
