@@ -6,7 +6,8 @@
 
 start() ->
 	spawn_link(fun() -> com_sup(0) end).
-	
+
+%Superviser which counts how many times it has failed. Has a limitance of 3 times.
 com_sup(Count) ->
 	process_flag(trap_exit, true),
 	{ok, _Pid} = start_server(),
@@ -79,6 +80,7 @@ handler(ASocket) ->
 %
 %
 
+%Converts the received msg to erlang variables usable in the program.
 messageparser(String) ->
     Session = string:sub_word(String, 1),
     Celeb1 = string:sub_word(String, 2) ++ " " ++ string:sub_word(String, 3),
@@ -86,7 +88,8 @@ messageparser(String) ->
     Celeb2 = string:sub_word(String, 5) ++ " " ++ string:sub_word(String, 6),
     Hp2 = string:sub_word(String, 7),
     {Session, Celeb1, Hp1, Celeb2, Hp2}.
-    
+
+%Takes the binaries away. Can maybe use binary_to_list?
 stringparser(String) ->
 	Newstring = re:replace(String, "<", "", [global, {return, list}]),
 	Finalstring = re:replace(Newstring, ">", "", [global, {return, list}]),

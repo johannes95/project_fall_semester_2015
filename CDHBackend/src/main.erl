@@ -9,6 +9,7 @@ start() ->
     main ! start,
     ok.
 
+% Main server loop. start spawns the main sup, stop sends a terminate msg to all the started modules.
 loop() ->
   receive
     start ->
@@ -23,7 +24,8 @@ loop() ->
       Pid ! stopped,
       exit(normal)
   end.
-    
+
+%Superviser, starts all appropriate modules and looks over them.
 super_sup() ->
     process_flag(trap_exit, true),
     spawn_link(fun communication_layer:start/0),
@@ -65,7 +67,8 @@ super_sup() ->
             end,
             super_sup()
     end.
-    
+
+%Stops the main program.    
 stop() ->
     main ! {stop, self()},
     receive

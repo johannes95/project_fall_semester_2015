@@ -4,6 +4,8 @@
 start() ->
   spawn_link(fun broadcaster_sup/0).
 
+% Superviser for the broadcaster. It starts the loop (server) and if it receives 
+% an Exit other than normal it restarts the process.
 broadcaster_sup() ->
   process_flag(trap_exit, true),
   {ok, _Pid} = broadcaster_start_link(),
@@ -28,6 +30,8 @@ broadcaster_start_link() ->
     end,
   {ok, S}.
 
+% Classic server. Has as a state a list of listeners. A listener can register itself to the broadcaster,
+% it can unregsiter, or the broadcaster can get a msg to pass to all listeners.
 broadcaster_loop(Listeners) ->
   receive
     {parser, Celebrity, Tweet} -> 

@@ -32,11 +32,11 @@ twitter_example() ->
 
   % Run our pipeline
   P = twitterminer_pipeline:build_link(twitter_print_pipeline(URL, Keys)),
-  
-  %register(miner, P),    %Cant register that...
 
-  % If the pipeline does not terminate after 60 s, this process will
-  % force it.
+  % Changed the example start so that it does not run on time but instead runs on msgs.
+  % Receives the terminate question only when the whole system is closed.
+  % Can be manually closed by sending a msg of terminate to the registered
+  % process miner.
   register(miner,spawn_link(fun () ->
         receive
           terminate -> 
