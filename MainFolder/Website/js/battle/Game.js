@@ -4,6 +4,8 @@ var character, character2;
 var width = 300, height = 150;
 var chosenCelebrity, cpuCelebrity;
 var hp1 = 38, hp2 = 36;
+//var queue = Array();
+
 
 window.onload = function() { 					  // Loads when the page(battle.html) loads
 	
@@ -15,11 +17,16 @@ window.onload = function() { 					  // Loads when the page(battle.html) loads
 	
 	//celebrity = new Celebrity(15,15);
 	
+	//setInterval(check database and load queue) every 5 seconds
+	
 	// Game loop
 	setInterval(		 // Calls a function with a set frequency
 		function() {
 		    update();	 // Update the game properties
 		    draw(board); // Draw with the updated properties
+		    //if ! action happening	
+		    	//check if anything in queue
+		    	//true -> do action
 		}, 30			 // Each function is called 30 times per second
 	);
 	// End Game loop
