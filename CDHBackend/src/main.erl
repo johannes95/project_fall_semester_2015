@@ -1,10 +1,13 @@
 -module(main).
 
--export([start/0, super_sup/0]).
+%-behaviour(application).
+
+-export([start/0, loop/0, super_sup/0, stop/0]).
 
 start() ->
     register (main, spawn(fun loop/0)),
-    main ! start.
+    main ! start,
+    ok.
 
 loop() ->
   receive
@@ -16,7 +19,9 @@ loop() ->
       broadcaster ! terminate,
       parser ! terminate,
       bridge ! terminate,
-      Pid ! stopped
+      miner ! terminate,
+      Pid ! stopped,
+      exit(normal)
   end.
     
 super_sup() ->
@@ -25,7 +30,7 @@ super_sup() ->
     spawn_link(fun parser:start/0),
     spawn_link(fun broadcaster:start/0),
     spawn_link(fun bridge:start/0),
-    %spawn_link(fun twitterminer_source:start/0),
+    spawn_link(fun twitterminer_source:start/0),
     
     receive
         {'EXIT', _From, normal} ->
@@ -53,6 +58,16 @@ super_sup() ->
                 _PidCl -> 
                     comLayer ! terminate
             end,
+            case whereis(miner) of
+                undefined -> ok;
+                _PidM -> 
+                    miner ! terminate
+            end,
             super_sup()
     end.
     
+stop() ->
+    main ! {stop, self()},
+    receive
+      stopped -> {ok, finished}
+    end.

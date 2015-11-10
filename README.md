@@ -70,3 +70,17 @@ IMPORTANT!!! STOP THE PROGRAM OR THE PORT WILL BE HOGGED!
         Please be responsible and stop both with process 11 and 12.
         Otherwise other users have a hard time testing the program.
     ---- end of note.
+    
+    
+    // Important
+    // Tests for appropriate start and stop of the main process.
+    // Testing with i().
+    Total                                                      45163   551548    0 - 220 //regular erl
+    Total                                                      74439   813171    0 - 316 //ensure all started
+    Total                                                      75781  1533820   19 - 340 //Running
+    Total                                                      75050  1589117   16 - 316//stop
+    
+    NEW VERSIOM
+    
+    Total                                                      66941   783722    0 - 399 //ensure all started
+    

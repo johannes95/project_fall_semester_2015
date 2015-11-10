@@ -1,0 +1,16 @@
+{application, cdh,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, [broadcaster, bridge, main, parser,comLayer, miner]},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  ssl,
+                  ibrowse,
+                  jiffy,
+                  oauth
+                 ]},
+  %{mod, { main, []}},
+  {env, []}
+ ]}.

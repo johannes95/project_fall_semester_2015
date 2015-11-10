@@ -61,7 +61,8 @@ handler(ASocket) ->
 			{HP11, _L1} = string:to_integer(Hp1),
 			{HP21, _L2} = string:to_integer(Hp2),
 			%io:format("Session: ~p Celeb1: ~p HP1 ~p Celeb2 ~p HP2 ~p~n",[Session, Celeb1, HP11, Celeb2, HP21]),
-			spawn(fun() -> battle_module:start(Session, Celeb1, HP11, Celeb2, HP21) end)
+			spawn(fun() -> battle_module:start(Session, Celeb1, HP11, Celeb2, HP21) end),
+			handler(ASocket)
 	end.
 
 %
