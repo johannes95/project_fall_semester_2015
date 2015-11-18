@@ -4,7 +4,10 @@
 
 -record(account_keys, {api_key, api_secret,
                        access_token, access_token_secret}).
--define(Celebrities,"Kim Kardashian, Cristiano Ronaldo").
+-define(Celebrities,"Kim Kardashian, Cristiano Ronaldo, 
+        Barack Obama, Beyonce Knowles, Bill Gates, Britney Spears, 
+        Jim Carrey, Justin Bieber,,Justin Timberlake, Katy Perry, 
+        Rihanna Fenty, Taylor Swift").
 
 start() -> spawn (fun twitter_example/0).
 
