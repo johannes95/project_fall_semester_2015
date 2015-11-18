@@ -40,7 +40,8 @@
                 		$oauth_token 		= $_SESSION['request_vars']['oauth_token'];
                 		$oauth_token_secret = $_SESSION['request_vars']['oauth_token_secret'];
                 ?>
-                        <div id="username"> Logged in as <?php echo $screen_name ?> </div>
+                        <div id="username"> Logged in as <?php echo $screen_name ?></div>
+                        <div id = "userid" style="visibility:hidden;"><?php echo $twitter_id ?></div>
                 <?php
                 	}
                 ?>

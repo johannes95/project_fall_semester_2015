@@ -3,17 +3,113 @@ var board;
 var character, character2;
 var width = 300, height = 150;
 var chosenCelebrity, cpuCelebrity;
-var hp1 = 38, hp2 = 36;
-//var queue = Array();
+var hp1, hp2;
+var positionP1 = 0;
+var positionP2 = 225;
+var playerCelebrity;
+var cpuCelebrity;
+// TESTING KIKE AND JOHANNES
+var queue = Array();
+var DBTimer = 0;
+var session; //This is temporary until we get the session from the start button.
 
-
-window.onload = function() { 					  // Loads when the page(battle.html) loads
+//Could do windows.onload = function(Session = getSession())
+function start(sess, celeb1, h1, celeb2, h2){
+	session=sess;
+	hp1=h1;
+	hp2 = h2
+	
 	
 	board = document.getElementById("board"); 	  // Get the context to draw on, the html canvas reference(battle.html)
-	playerCelebrity = new KimKardashian();        // From CelebDatabase.js
-	cpuCelebrity = new CristianoRonaldo();		  // From CelebDatabase.js
-	character = new Character(0,0,cpuCelebrity, false); 			  // Initializes a character(Character.js)
-	character2 = new Character(200,0,playerCelebrity, true);
+	
+	switch(celeb1) {
+		case "Kim Kardashian":
+			playerCelebrity = new KimKardashian();
+			break;
+		case "Cristiano Ronaldo":
+			playerCelebrity = new CristianoRonaldo();
+			break;
+		case "Rihanna Fenty":
+			playerCelebrity = new RihannaFenty();
+			break;
+		case "Beyonce Knowles":
+			playerCelebrity = new Beyonce();
+			break;
+		case "Bill Gates":
+			playerCelebrity = new BillGates();
+			break;
+		case "Katy Perry":
+			playerCelebrity = new KatyPerry();
+			break;
+		case "Justin Bieber":
+			playerCelebrity = new JustinBieber();
+			break;
+		case "Justin Timberlake":
+			playerCelebrity = new JustinTimberlake();
+			break;
+		case "Jim Carrey":
+			playerCelebrity = new JimCarrey();
+			break;
+		case "Barack Obama":
+			playerCelebrity = BarackObama();
+			break;
+	}
+	
+	switch(celeb2) {
+		case "Kim Kardashian":
+			cpuCelebrity = new KimKardashian();
+			break;
+		case "Cristiano Ronaldo":
+			cpuCelebrity = new CristianoRonaldo();
+			break;
+		case "Rihanna Fenty":
+			cpuCelebrity = new RihannaFenty();
+			break;
+		case "Beyonce Knowles":
+			cpuCelebrity = new Beyonce();
+			break;
+		case "Bill Gates":
+			cpuCelebrity = new BillGates();
+			break;
+		case "Katy Perry":
+			cpuCelebrity = new KatyPerry();
+			break;
+		case "Justin Bieber":
+			cpuCelebrity = new JustinBieber();
+			break;
+		case "Justin Timberlake":
+			cpuCelebrity = new JustinTimberlake();
+			break;
+		case "Jim Carrey":
+			cpuCelebrity = new JimCarrey();
+			break;
+		case "Barack Obama":
+			cpuCelebrity = BarackObama();
+			break;
+	}
+	//cpuCelebrity = new KimKardashian();        // From CelebDatabase.js
+	//playerCelebrity = new KimKardashian();
+	//playerCelebrity = new CristianoRonaldo();		  // From CelebDatabase.js
+	//cpuCelebrity = new CristianoRonaldo();
+	//cpuCelebrity = new Beyonce();
+	//playerCelebrity = new Beyonce();
+	//playerCelebrity = new TaylorSwift();
+	//cpuCelebrity = new BarackObama();
+	//playerCelebrity = new JustinBieber();
+	//cpuCelebrity = new JustinTimberlake();
+	//playerCelebrity = new JimCarrey();
+	//cpuCelebrity = new JimCarrey();
+	//playerCelebrity = new BritneySpears();
+	//cpuCelebrity = new BritneySpears();
+	//cpuCelebrity = new KatyPerry();
+	//playerCelebrity = new KatyPerry();
+	//cpuCelebrity = new RihannaFenty();
+	//playerCelebrity = new RihannaFenty();
+	//playerCelebrity = new BillGates();
+	//cpuCelebrity = new BillGates();
+	
+	character = new Character(positionP1,0,playerCelebrity, false); 			  // Initializes a character(Character.js)
+	character2 = new Character(positionP2,0,cpuCelebrity, true);
 	
 	//celebrity = new Celebrity(15,15);
 	
@@ -24,19 +120,42 @@ window.onload = function() { 					  // Loads when the page(battle.html) loads
 		function() {
 		    update();	 // Update the game properties
 		    draw(board); // Draw with the updated properties
-		    //if ! action happening	
-		    	//check if anything in queue
-		    	//true -> do action
-		}, 30			 // Each function is called 30 times per second
+		    if(DBTimer++ == 100) {
+		    	checkDB();
+		    	DBTimer =0;
+		    }
+		    if (character.x == positionP1 && character2.x == positionP2)
+		    	if (queue.length > 0) {
+		    		var action = getQueueItem();
+		    		console.log("Action available:");
+		    		console.log(action);
+		    		if (action.Attacker == playerCelebrity.name) {
+		    			hit1();
+		    			//This is where we need to do the hp as well and the tweet
+		    		}
+		    		else if (action.Attacker == cpuCelebrity.name) {
+		    			hit2();
+		    			//This is where we need to do the hp as well and the tweet
+		    		}
+		    		else
+		    		{
+		    			console.log("Error. Attacker: " + action.Attacker + " does not match player: " + 
+		    				playerCelebrity.name + " nor cpu: " + cpuCelebrity.name);
+		    		}
+		    	}
+		    										// Do whatever is in variable action (depends on how johannes queued)
+		}, 45			 // Each function is called 30 times per second
 	);
 	// End Game loop
 
     document.getElementById("hit1").onmousedown = function() {
         hit1();
+        addTweet(playerCelebrity.name,"Hit " +  cpuCelebrity.name + " heeyoooo");
     }
 
     document.getElementById("hit2").onmousedown = function() {
         hit2();
+        addTweet(cpuCelebrity.name,"Hit " + "@" + playerCelebrity.name);
     }
 
 };
@@ -69,20 +188,28 @@ function update() {
 }
 
 function hit1() {
-	character.hit();
-	hp2--;
+	// makes sure that only one character can hit at a time and doesn't double hit
+	if(character.x == positionP1 && character2.x == positionP2) {
+		character.hit();
+		hp2--;
+	}
+	
 }
 
 function hit2() {
-	character2.hit();
-	hp1--;
+	// makes sure that only one character can hit at a time and doesn't double hit
+	if(character.x == positionP1 && character2.x == positionP2) {
+		character2.hit();
+		hp1--;		
+	}
+
 }
 
 function drawHpBars(context) {
 	
 	context.fillStyle = "red";
-	context.fillText("HP: 38/" + hp1, 10, 10);
-	context.fillText("HP: 36/" + hp2, 220, 10);
+	context.fillText("HP:" + hp1 +"/10", 20, 10);
+	context.fillText("HP: " + hp2+"/10", 240, 10);
 	
 }
 
@@ -120,9 +247,53 @@ function gameOverText(context,celebrity) {
 	// context.font = "50px Arial";
 	
 	if(celebrity == 0) {
-		context.fillText("Cristiano Ronaldo died", 10, 10);
+		context.fillText(cpuCelebrity.name + " died", 10, 10); //writes out the celebrity name on the deathscreen
 	}else {
-		context.fillText("Kim Kardashian died", 10, 10);	
+		context.fillText(playerCelebrity.name +" died", 10, 10);	
 	}
+}
 
+function checkDB() {
+		
+	//Make http request
+	 var url = "https://celebrity-database-arnolf.c9.io/Database/Battle.php";
+	 var client = new XMLHttpRequest();
+	 client.open('GET', url+"?session="+session, true);
+	 client.onreadystatechange = function() {
+	 	if (client.readyState == 4 && client.status == 200) {
+	    	var subresponse = client.responseText;
+		 	var response = jQuery.parseJSON(subresponse);
+		 	//check what data was returned
+			if(response.success != false){
+				
+				for(var i = 0; i < Object.keys(response).length-1; i++){ //loop through the return json
+					addToQueue(response[i]); // add current tuple to queue
+					//console.log("queue:");
+					//console.log(queue);
+				}
+				console.log("Done loading actions.");
+			}else{
+				console.log("Something went wrong, or the array returned was empty");
+			}
+	    }
+	 }
+	 client.send();
+}
+
+function getQueueItem() {
+	if(queue.length != 0){
+		return queue.shift(); // return first obejct since js push adds new objects at the end of an array
+	}else{
+		return null; // if queue is empty
+	}
+}
+
+
+function addToQueue(object) {
+	if(object != null){
+		queue.push(object);
+	}else{
+		console.log("Could not save action to queue");
+	}
+	
 }

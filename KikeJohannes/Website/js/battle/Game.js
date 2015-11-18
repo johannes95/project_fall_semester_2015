@@ -4,10 +4,15 @@ var character, character2;
 var width = 300, height = 150;
 var playerCelebrity, cpuCelebrity;
 var hp1 = 38, hp2 = 36;
-//var queue = Array();
+var queue = Array();
+var session = "kikedaddyo";
+var DBTimer = 0;
 
 
-window.onload = function() { 					  // Loads when the page(battle.html) loads
+$(document).ready(function(){
+
+	/*********************DELETE^^^^^^^^^***************/
+	// Loads when the page(battle.html) loads
 	
 	board = document.getElementById("board"); 	  // Get the context to draw on, the html canvas reference(battle.html)
 	playerCelebrity = new KimKardashian();        // From CelebDatabase.js
@@ -18,16 +23,76 @@ window.onload = function() { 					  // Loads when the page(battle.html) loads
 	//celebrity = new Celebrity(15,15);
 	
 	//setInterval(check database and load queue) every 5 seconds
+	//var time_interval = 5000;
+	/*setInterval(*/function checkDB(){
+		
+		//Make http request
+		 var url = "https://celebrity-database-arnolf.c9.io/Database/Battle.php";
+		 var client = new XMLHttpRequest();
+		 client.open('GET', url+"?session="+session, true);
+		 client.onreadystatechange = function() {
+		 	if (client.readyState == 4 && client.status == 200) {
+		    	var subresponse = client.responseText;
+			 	var response = jQuery.parseJSON(subresponse);
+			 	//check what data was returned
+				if(response.success != false){
+					
+					for(var i = 0; i < Object.keys(response).length-1; i++){ //loop through the return json
+						addToQueue(response[i]); // add current tuple to queue
+						//console.log("queue:");
+						//console.log(queue);
+					}
+					console.log("Done loading actions.");
+				}else{
+					console.log("Something went wrong, or the array returned was empty");
+				}
+		    }
+		 }
+		 client.send();
+	}/*, time_interval);*/
+
+
+	//return first object in queue if queue isn't empty
+	function getQueueItem() {
+		if(queue.length != 0){
+			return queue.shift(); // return first obejct since js push adds new objects at the end of an array
+		}else{
+			return null; // if queue is empty
+		}
+	}
+	
+	
+	function addToQueue(object){
+		if(object != null){
+			queue.push(object);
+		}else{
+			console.log("Could not save action to queue");
+		}
+		
+	}
+
+
+
+	
 	
 	// Game loop
 	setInterval(		 // Calls a function with a set frequency
 		function() {
 		    update();	 // Update the game properties
 		    draw(board); // Draw with the updated properties
-		    //if ! action happening	
-		    	//check if anything in queue
-		    	//true -> do action
-		}, 30			 // Each function is called 30 times per second
+		    if(DBTimer++ == 100) {
+		    	checkDB();
+		    	DBTimer =0;
+		    }
+		    if (character.shouldPunch == false && character.isPunching==false && character.isWalking==false &&
+		    	character2.shouldPunch == false && character2.isPunching==false && character2.isWalking==false)
+		    	if (queue.length > 0) {
+		    		var action = getQueueItem();
+		    		console.log("Action available:");
+		    		console.log(action);
+		    	}
+		    										// Do whatever is in variable action (depends on how johannes queued)
+		}, 45			 // Each function is called 30 times per second
 	);
 	// End Game loop
 
@@ -39,7 +104,7 @@ window.onload = function() { 					  // Loads when the page(battle.html) loads
         hit2();
     }
 
-};
+});
 
 function draw(board) {
 	
@@ -69,13 +134,17 @@ function update() {
 }
 
 function hit1() {
-	character.hit();
-	hp2--;
+	if(character.x == 0) {
+		character.hit();
+		hp2--;
+	}
 }
 
 function hit2() {
-	character2.hit();
-	hp1--;
+	if(character2.x == 200) {
+		character2.hit();
+		hp1--;
+	}	
 }
 
 function drawHpBars(context) {
@@ -85,6 +154,19 @@ function drawHpBars(context) {
 	context.fillText("HP: 36/" + hp2, 220, 10);
 	
 }
+/* Might not be needed since Alex and Mike will figure out how to initialize the session.
+function makeid(l)
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    for( var i=0; i < l; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+*/
+//alert(makeid(10));
 
 var gameOverColor = 0,
 	colorArray = ["#000000", "#111111", "#222222", "#333333", "#444444", "#555555", "#666666", "#777777", "#888888", "#999999"],
@@ -124,5 +206,9 @@ function gameOverText(context,celebrity) {
 	}else {
 		context.fillText("Kim Kardashian died", 10, 10);	
 	}
+	
+	
+	
+	
 
 }

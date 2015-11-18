@@ -1,5 +1,5 @@
 =erl_crash_dump:0.3
-Tue Nov 10 00:32:14 2015
+Mon Nov 16 13:19:40 2015
 Slogan: could not start kernel pid (application_controller) (error in config file "./twitterminer.config" (none): configuration file not found)
 System version: Erlang R16B03 (erts-5.10.4) [source] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
 Compiled: Tue Aug 19 16:45:11 2014
@@ -3030,8 +3030,8 @@ option smbcs: 262144
 option mbcgs: 10
 option acul: 0
 option as: bf
-mbcs blocks: 0 15 15
-mbcs blocks size: 0 14576 14576
+mbcs blocks: 0 13 13
+mbcs blocks size: 0 13328 13328
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -3518,7 +3518,7 @@ Name: init
 Spawned as: otp_ring0:start/2
 Last scheduled in for: erlang:bif_return_trap/1
 Spawned by: []
-Started: Tue Nov 10 00:32:14 2015
+Started: Mon Nov 16 13:19:40 2015
 Message queue length: 1
 Number of heap fragments: 0
 Heap fragment data: 0
@@ -3559,274 +3559,274 @@ Current size: 1464
 Module: prim_zip
 Uniq: 76810209
 Index: 0
-Address: 0x00007f824200f940
+Address: 0x00007f12f3acf940
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 1
-Address: 0x00007f824200f8e8
+Address: 0x00007f12f3acf8e8
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 2
-Address: 0x00007f824200f8b0
+Address: 0x00007f12f3acf8b0
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 3
-Address: 0x00007f824200f878
+Address: 0x00007f12f3acf878
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 4
-Address: 0x00007f824200f808
+Address: 0x00007f12f3acf808
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 5
-Address: 0x00007f824200f7a8
+Address: 0x00007f12f3acf7a8
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 6
-Address: 0x00007f824200f750
+Address: 0x00007f12f3acf750
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 20
-Address: 0x00007f8242070d08
+Address: 0x00007f12f3b30d08
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 3
-Address: 0x00007f82420207c0
+Address: 0x00007f12f3ae07c0
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 2
-Address: 0x00007f82420207f8
+Address: 0x00007f12f3ae07f8
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 17
-Address: 0x00007f82420710d0
+Address: 0x00007f12f3b310d0
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 1
-Address: 0x00007f8242020830
+Address: 0x00007f12f3ae0830
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 16
-Address: 0x00007f8242071100
+Address: 0x00007f12f3b31100
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 0
-Address: 0x00007f8242020868
+Address: 0x00007f12f3ae0868
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 19
-Address: 0x00007f8242070f00
+Address: 0x00007f12f3b30f00
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 18
-Address: 0x00007f8242071098
+Address: 0x00007f12f3b31098
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 13
-Address: 0x00007f8242071d00
+Address: 0x00007f12f3b31d00
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 5
-Address: 0x00007f8242020518
+Address: 0x00007f12f3ae0518
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 12
-Address: 0x00007f8242071eb0
+Address: 0x00007f12f3b31eb0
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 4
-Address: 0x00007f8242020620
+Address: 0x00007f12f3ae0620
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 15
-Address: 0x00007f82420714f0
+Address: 0x00007f12f3b314f0
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 14
-Address: 0x00007f8242071770
+Address: 0x00007f12f3b31770
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 9
-Address: 0x00007f8242072200
+Address: 0x00007f12f3b32200
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 8
-Address: 0x00007f8242072368
+Address: 0x00007f12f3b32368
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 11
-Address: 0x00007f8242071f30
+Address: 0x00007f12f3b31f30
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 10
-Address: 0x00007f8242072098
+Address: 0x00007f12f3b32098
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 5
-Address: 0x00007f82420727a0
+Address: 0x00007f12f3b327a0
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 4
-Address: 0x00007f82420728d8
+Address: 0x00007f12f3b328d8
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 7
-Address: 0x00007f82420724d0
+Address: 0x00007f12f3b324d0
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 6
-Address: 0x00007f8242072638
+Address: 0x00007f12f3b32638
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 1
-Address: 0x00007f8242072d20
+Address: 0x00007f12f3b32d20
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 0
-Address: 0x00007f8242072e98
+Address: 0x00007f12f3b32e98
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 3
-Address: 0x00007f8242072a50
+Address: 0x00007f12f3b32a50
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 2
-Address: 0x00007f8242072bb8
+Address: 0x00007f12f3b32bb8
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 8
-Address: 0x00007f8241fff150
+Address: 0x00007f12f3abf150
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 6
-Address: 0x00007f8241fff1e0
+Address: 0x00007f12f3abf1e0
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 7
-Address: 0x00007f8241fff1a8
+Address: 0x00007f12f3abf1a8
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 4
-Address: 0x00007f8241fff910
+Address: 0x00007f12f3abf910
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 5
-Address: 0x00007f8241fff510
+Address: 0x00007f12f3abf510
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 2
-Address: 0x00007f8241fffaf0
+Address: 0x00007f12f3abfaf0
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 3
-Address: 0x00007f8241fffa90
+Address: 0x00007f12f3abfa90
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 0
-Address: 0x00007f8241fffb60
+Address: 0x00007f12f3abfb60
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 1
-Address: 0x00007f8241fffb28
+Address: 0x00007f12f3abfb28
 Refc: 1
 =fun
 Module: erlang
 Uniq: 117156064
 Index: 0
-Address: 0x00007f82420526c0
+Address: 0x00007f12f3b126c0
 Refc: 1
 =proc_messages:<0.0.0>
-H7F8231FA5F10:N
+H7F12E3A65F10:N
 =proc_stack:<0.0.0>
-0x00007f8231faad38:SReturn addr 0x41FF3000 (init:boot_loop/2 + 2800)
-0x00007f8231faad40:SReturn addr 0x8441C8 (<terminate process normally>)
+0x00007f12e3a6ad38:SReturn addr 0xF3AB3000 (init:boot_loop/2 + 2800)
+0x00007f12e3a6ad40:SReturn addr 0x8441C8 (<terminate process normally>)
 y0:P<0.2.0>
 =proc_heap:<0.0.0>
-7F8231FA5F10:t3:A4:EXIT,P<0.2.0>,A6:killed
+7F12E3A65F10:t3:A4:EXIT,P<0.2.0>,A6:killed
 =atoms
 'Argument__1'
 'Argument__2'

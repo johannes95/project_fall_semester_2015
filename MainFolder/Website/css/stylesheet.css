@@ -78,13 +78,67 @@ nav{
     padding:0;
 }
 
-#board {
-    background:#ccc;
-    margin-left:140px;
-    margin-right:140px;
+#game {
+    /*NEW*/
+    margin-left:auto;
     margin-right:auto;
-    width:800px; 
+    margin-left:140px;
+    float:left;
+    background-image:url(../img/soccer-stadium-800x500.jpg);
+}
+
+#board {
+    /*NEW*/
+    width:600px; 
     height:500px;
+    float:left;
+}
+
+/*NEW*/
+#tweetWrapper {
+    background:rgba(207, 226, 243, 1);/*"#cfe2f3"*/;
+    width:196px;
+    height:496px;
+    float:left;
+    margin:0;
+    border:2px solid #3c78d8;
+}
+
+/*NEW*/
+.tweetBox {
+    background:white;
+    border:1px solid black;
+}
+
+/*NEW*/
+.tweetBoxTitle {
+    color:#3c78d8;
+    font-weight:bold;
+    text-align:center;
+    width:100%;
+    float:left;
+    margin-top:5px;
+}
+ /*NEW*/
+.tweetBoxContent {
+    margin-left:10px;
+}
+
+/*NEW*/
+.tweetBoxAtText {
+    font-weight:bold;
+}
+
+#select_char {
+    text-align: center;
+    border-style: solid;
+}
+
+#select_box {
+    width: 150px;
+    height: 20px;
+    margin-left: 450px;
+    margin-right: auto;
 }
 
 #hitBox {

@@ -61,9 +61,12 @@ handler(ASocket) ->
 			{Session, Celeb1, Hp1, Celeb2, Hp2} = messageparser(stringparser(_Msg)),
 			{HP11, _L1} = string:to_integer(Hp1),
 			{HP21, _L2} = string:to_integer(Hp2),
+			gen_tcp:send(ASocket, "Received"), %Send a msg back to the erlang-bridge
 			%io:format("Session: ~p Celeb1: ~p HP1 ~p Celeb2 ~p HP2 ~p~n",[Session, Celeb1, HP11, Celeb2, HP21]),
 			spawn(fun() -> battle_module:start(Session, Celeb1, HP11, Celeb2, HP21) end),
-			handler(ASocket)
+			handler(ASocket);
+		{tcp_closed, ASocket} -> %The php socket sends this kind of message..
+   			do_something
 	end.
 
 %

@@ -2,12 +2,16 @@
 
 %-behaviour(application).
 
--export([start/0, loop/0, super_sup/0, stop/0]).
+-export([start/0, loop/0, super_sup/0, stop/0, restart/0]).
 
 start() ->
     register (main, spawn(fun loop/0)),
     main ! start,
     ok.
+
+restart() -> %Not the most elegant but will do for now.
+  miner!terminate,
+  spawn(fun twitterminer_source:start/0).
 
 % Main server loop. start spawns the main sup, stop sends a terminate msg to all the started modules.
 loop() ->

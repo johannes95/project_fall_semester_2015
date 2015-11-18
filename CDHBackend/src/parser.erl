@@ -55,4 +55,4 @@ findname(Tweet) ->
  stringparser(String) ->
  	Newstring = re:replace(String, "<", "", [global, {return, list}]),
  	Finalstring = re:replace(Newstring, ">", "", [global, {return, list}]),
- 	Finalstring.
+    Finalstring.

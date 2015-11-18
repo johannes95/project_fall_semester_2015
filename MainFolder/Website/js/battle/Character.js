@@ -23,7 +23,14 @@ function Character(x,y,celebrity,isPlayer) {
     this.punchCounter = 0;
     this.spritesheetNormal = celebrity.spritesheetNormal;
     this.spritesheetWalking = celebrity.spritesheetWalking;
-    this.spritesheetPunching = celebrity.spritesheetPunching;
+    //this.spritesheetPunching = celebrity.spritesheetPunching;
+    
+    if(x == 0) {
+    	this.spritesheetPunching = celebrity.spritesheetPunchingRight;
+    }
+    else {
+    	this.spritesheetPunching = celebrity.spritesheetPunchingLeft;
+    }
     
     // Gets the context(board/canvas) and draws the character, with its attributes, on the context.
     this.draw = function(context) {
@@ -149,38 +156,80 @@ function Character(x,y,celebrity,isPlayer) {
     	
     }
     
+    /*Checks the hitting of a celebrity. This function is called in the update function which is called ~33 times per second.
+ 		
+    */
     this.checkPunch = function() {
     	
+    	// If the celebrity is on the left
     	if(x == 0) {
     	
+    		// If the hit should occur
 	    	if(this.shouldPunch) {
-	    		if(this.x + this.width < 225)
-	    			this.x += 5;
+	    		
+	    		// As long as the celebrity has not reached the enemy
+	    		if(this.x + this.width < positionP2+25)
+	    			this.x += 5; // Move towards the enemy
+	    		
+	    		// If the celebrity has reached the enemy
 	    		else {
-	    			this.shouldPunch = false;
+	    			
+	    			// Make the punch
+	    			if(this.punchCounter == 33) {
+	    				this.shouldPunch = false;
+	    				this.punchCounter = 0;
+	    			} else {
+	    				this.punchCounter++;
+	    			}
+	    			
 	    			this.isWalking = false;
 	    			this.isPunching = true;
 	    		}
-	    	} else if(this.x > 0) {
-	    		this.x -= 5;
+	    		
+	    	// When the celebrity should walk back to its position
+	    	} else if(this.x > positionP1) {
+	    		this.isWalking = true;
+	    		this.x -= 5; // Move back to the normal position
+	    		
+	    	// When the celebrity should not hit and is in its normal(this.x = 0) position
 	    	} else {
 	    		this.isWalking = false;
 	    	}
     	
+    	// If the celebrity is on the right
     	} else {
     		
+    		// If the hit should occur
 	    	if (this.shouldPunch) {
-	    		if (this.x > 75)
-	    			this.x -= 5;
+	    		
+	    		// As long as the celebrity has not reached the enemy
+	    		if (this.x > positionP1+50)
+	    			this.x -= 5; // Move towards the enemy
+	    			
+	    		// If the celebrity has reached the enemy
 	    		else {
-	    			this.shouldPunch = false;
+	    			
+	    			// Make the punch
+	    			if(this.punchCounter == 33) {
+	    				this.shouldPunch = false;
+	    				this.punchCounter = 0;
+	    			} else {
+	    				this.punchCounter++;
+	    			}
+	    			
 	    			this.isWalking = false;
 	    			this.isPunching = true;
+	    			
 	    		}
 	    	}
-	    	else if (this.x < 200) {
-	    		this.x += 5;
+	    	
+	    	// When the celebrity should walk back to its position
+	    	else if (this.x < positionP2) {
+	    		this.isWalking = true;
+	    		this.x += 5; // Move back to normal position
 	    	}
+	    	
+	    	// When the celebrity should not hit and is in its normal(this.x = 200)
 	    	else {
 	    		this.isWalking = false;
 	    	}
