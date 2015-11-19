@@ -4,6 +4,7 @@ var character, character2;
 var width = 300, height = 150;
 var chosenCelebrity, cpuCelebrity;
 var hp1, hp2;
+var originalhp1, originalhp2;
 var positionP1 = 0;
 var positionP2 = 225;
 var playerCelebrity;
@@ -16,9 +17,11 @@ var session; //This is temporary until we get the session from the start button.
 //Could do windows.onload = function(Session = getSession())
 function start(sess, celeb1, h1, celeb2, h2){
 	session=sess;
-	hp1=h1;
-	hp2 = h2
-	
+	originalhp1 = h1;
+	originalhp2 = h2;
+	hp1= h1;
+	hp2 = h2;
+	console.log("Into the battle- c1:"+celeb1+" h1:"+h1+" celeb2:"+celeb2+" h2:"+h2)
 	
 	board = document.getElementById("board"); 	  // Get the context to draw on, the html canvas reference(battle.html)
 	
@@ -51,7 +54,13 @@ function start(sess, celeb1, h1, celeb2, h2){
 			playerCelebrity = new JimCarrey();
 			break;
 		case "Barack Obama":
-			playerCelebrity = BarackObama();
+			playerCelebrity = new BarackObama();
+			break;
+		case "Taylor Swift":
+			playerCelebrity = new TaylorSwift();
+			break;
+		case "Britney Spears":
+			playerCelebrity = new BritneySpears();
 			break;
 	}
 	
@@ -84,37 +93,20 @@ function start(sess, celeb1, h1, celeb2, h2){
 			cpuCelebrity = new JimCarrey();
 			break;
 		case "Barack Obama":
-			cpuCelebrity = BarackObama();
+			cpuCelebrity = new BarackObama();
+			break;
+		case "Taylor Swift":
+			cpuCelebrity = new TaylorSwift();
+			break;
+		case "Britney Spears":
+			cpuCelebrity = new BritneySpears();
 			break;
 	}
-	//cpuCelebrity = new KimKardashian();        // From CelebDatabase.js
-	//playerCelebrity = new KimKardashian();
-	//playerCelebrity = new CristianoRonaldo();		  // From CelebDatabase.js
-	//cpuCelebrity = new CristianoRonaldo();
-	//cpuCelebrity = new Beyonce();
-	//playerCelebrity = new Beyonce();
-	//playerCelebrity = new TaylorSwift();
-	//cpuCelebrity = new BarackObama();
-	//playerCelebrity = new JustinBieber();
-	//cpuCelebrity = new JustinTimberlake();
-	//playerCelebrity = new JimCarrey();
-	//cpuCelebrity = new JimCarrey();
-	//playerCelebrity = new BritneySpears();
-	//cpuCelebrity = new BritneySpears();
-	//cpuCelebrity = new KatyPerry();
-	//playerCelebrity = new KatyPerry();
-	//cpuCelebrity = new RihannaFenty();
-	//playerCelebrity = new RihannaFenty();
-	//playerCelebrity = new BillGates();
-	//cpuCelebrity = new BillGates();
 	
 	character = new Character(positionP1,0,playerCelebrity, false); 			  // Initializes a character(Character.js)
 	character2 = new Character(positionP2,0,cpuCelebrity, true);
-	
-	//celebrity = new Celebrity(15,15);
-	
+
 	//setInterval(check database and load queue) every 5 seconds
-	
 	// Game loop
 	setInterval(		 // Calls a function with a set frequency
 		function() {
@@ -129,19 +121,29 @@ function start(sess, celeb1, h1, celeb2, h2){
 		    		var action = getQueueItem();
 		    		console.log("Action available:");
 		    		console.log(action);
-		    		if (action.Attacker == playerCelebrity.name) {
-		    			hit1();
-		    			//This is where we need to do the hp as well and the tweet
-		    		}
-		    		else if (action.Attacker == cpuCelebrity.name) {
-		    			hit2();
-		    			//This is where we need to do the hp as well and the tweet
-		    		}
-		    		else
-		    		{
-		    			console.log("Error. Attacker: " + action.Attacker + " does not match player: " + 
+		    		
+		    		if ('attacker' in action) {
+		    			if (action.Attacker == playerCelebrity.name) {
+		    				hit1(action.HP1,action.HP2);
+		    				addTweet(playerCelebrity.name,"Hit " +  cpuCelebrity.name + ": </br>" + action.Tweet);
+		    				//This is where we need to do the hp as well and the tweet
+		    			}
+		    			else if (action.Attacker == cpuCelebrity.name) {
+		    				hit2(action.HP1,action.HP2);
+		    				addTweet(cpuCelebrity.name,"Hit " +  playerCelebrity.name + ": </br>" + action.Tweet);
+		    				//This is where we need to do the hp as well and the tweet
+		    			}
+		    			else
+		    			{
+		    				console.log("Error. Attacker: " + action.Attacker + " does not match player: " + 
 		    				playerCelebrity.name + " nor cpu: " + cpuCelebrity.name);
+		    			}
+		    		} else {
+		    			alert("Server crashed");
+		    			location.reload();
 		    		}
+		    		
+
 		    	}
 		    										// Do whatever is in variable action (depends on how johannes queued)
 		}, 45			 // Each function is called 30 times per second
@@ -149,13 +151,13 @@ function start(sess, celeb1, h1, celeb2, h2){
 	// End Game loop
 
     document.getElementById("hit1").onmousedown = function() {
-        hit1();
-        addTweet(playerCelebrity.name,"Hit " +  cpuCelebrity.name + " heeyoooo");
+        hit1(hp1, hp2-1);
+        addTweet(playerCelebrity.name,"Hit " + "@" + cpuCelebrity.name + " heeyoooo");
     }
 
     document.getElementById("hit2").onmousedown = function() {
-        hit2();
-        addTweet(cpuCelebrity.name,"Hit " + "@" + playerCelebrity.name);
+        hit2(hp1-1, hp2);
+        addTweet(cpuCelebrity.name,"Hit " + "@" + playerCelebrity.name + "heeyoooo");
     }
 
 };
@@ -187,20 +189,22 @@ function update() {
 
 }
 
-function hit1() {
+function hit1(newhp1,newhp2) {
 	// makes sure that only one character can hit at a time and doesn't double hit
 	if(character.x == positionP1 && character2.x == positionP2) {
 		character.hit();
-		hp2--;
+		hp1 = newhp1;
+		hp2 = newhp2;
 	}
 	
 }
 
-function hit2() {
+function hit2(newhp1, newhp2) {
 	// makes sure that only one character can hit at a time and doesn't double hit
 	if(character.x == positionP1 && character2.x == positionP2) {
 		character2.hit();
-		hp1--;		
+		hp1 = newhp1;
+		hp2 = newhp2;
 	}
 
 }
@@ -208,8 +212,8 @@ function hit2() {
 function drawHpBars(context) {
 	
 	context.fillStyle = "red";
-	context.fillText("HP:" + hp1 +"/10", 20, 10);
-	context.fillText("HP: " + hp2+"/10", 240, 10);
+	context.fillText("HP:" + hp1 +"/"+originalhp1, positionP1+20, 10);
+	context.fillText("HP: " + hp2+"/"+originalhp2, positionP2+20, 10);
 	
 }
 
@@ -247,9 +251,9 @@ function gameOverText(context,celebrity) {
 	// context.font = "50px Arial";
 	
 	if(celebrity == 0) {
-		context.fillText(cpuCelebrity.name + " died", 10, 10); //writes out the celebrity name on the deathscreen
+		context.fillText(playerCelebrity.name + " died", 10, 10); //writes out the celebrity name on the deathscreen
 	}else {
-		context.fillText(playerCelebrity.name +" died", 10, 10);	
+		context.fillText(cpuCelebrity.name +" died", 10, 10);
 	}
 }
 

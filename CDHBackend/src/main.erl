@@ -7,7 +7,7 @@
 start() ->
     register (main, spawn(fun loop/0)),
     main ! start,
-    ok.
+    ok.%
 
 restart() -> %Not the most elegant but will do for now.
   miner!terminate,
@@ -27,6 +27,12 @@ loop() ->
       miner ! terminate,
       Pid ! stopped,
       exit(normal)
+      
+      %{ok, LSocket} = gen_tcp:listen(10000, [binary, {active, false}]),
+      %{ok, ASocket} = gen_tcp:accept(LSocket),
+      %gen_tcp:send(ASocket, "Server_crash"),
+      %gen_tcp:close(ASocket),
+      
   end.
 
 %Superviser, starts all appropriate modules and looks over them.
@@ -43,6 +49,9 @@ super_sup() ->
             exit(normal); %Never goes here/normal msg
         {'EXIT', _From, _Reason} ->
             io:format("SuperSupervisor restarting everything!~n", []),
+            
+            %%Send a message though a socket@10000 to say that the server crashed
+            ibrowse:send_req("https://project-fall-semester-2015-kikedaddy-1.c9.io/CDHBackend/erlang-php-bridge.php?error=%22crash%22", [], get),
             %---Start bridge first!...%%
             case whereis(broadcaster) of
                 undefined -> ok;

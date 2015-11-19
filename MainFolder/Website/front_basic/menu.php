@@ -33,13 +33,14 @@
     <nav>
         <!-- Menu Item Home -->
         <div id="nav-item-index" class="nav-item" style="margin-left:0 !important;"><a href='index.php'>Home</a></div>
-        <!-- Menu Item Battle -->
-        <div id="nav-item-battle" class="nav-item"><a href="battle.php" >Battle</a></div>
+       
         <?php
         //Checks if the user is logged in
     	if(isset($_SESSION['status']) && $_SESSION['status'] == 'verified') 
     	{
     	?>
+        	 <!-- Menu Item Battle -->
+            <div id="nav-item-battle" class="nav-item"><a href="battle.php" >Battle</a></div>
     	    <!-- Menu Item Character -->
     	    <div id="nav-item-characters" class="nav-item"><a href="characters.php" >My character</a></div>
             <!-- Menu Item Logout -->
