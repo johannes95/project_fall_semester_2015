@@ -26,10 +26,11 @@ parser_start_link() ->
     
 init() ->
     receive
-        {terminate} ->
-            ok;
+        terminate ->
+            exit(normal);
         {Tweet} ->
             Celebrity = findname(stringparser(Tweet)),
+            %Celebrity = findname(Tweet),
             case Celebrity==[] of
                 true -> 
                     init();
@@ -48,7 +49,7 @@ findname(Tweet) ->
     
     Celebrity.
     
-stringparser(String) ->
-	Newstring = re:replace(String, "<", "", [global, {return, list}]),
-	Finalstring = re:replace(Newstring, ">", "", [global, {return, list}]),
-	Finalstring.
+ stringparser(String) ->
+ 	Newstring = re:replace(String, "<", "", [global, {return, list}]),
+ 	Finalstring = re:replace(Newstring, ">", "", [global, {return, list}]),
+ 	Finalstring.

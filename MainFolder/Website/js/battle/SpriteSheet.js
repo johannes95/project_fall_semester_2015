@@ -47,6 +47,7 @@ function SpriteSheet(path, frameWidth, frameHeight, width, height, frameSpeed, e
          	frameWidth, frameHeight,
          	x, y,
          	width, height);
+          
   	};
 
 }

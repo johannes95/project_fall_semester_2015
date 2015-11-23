@@ -200,7 +200,8 @@ player(Name, {battle, HP}) ->
     end.
 
 % erl -pa deps/*/ebin -pa ebin -config twitterminer
-% application:ensure_all_started(twitterminer), twitterminer_source:twitter_example().
+% application:ensure_all_started(twitterminer).
+% twitterminer_source:start().
 
 %Answers = [string:str(Tweet, Name) || Name <-Record (Celeb)]
 %evaluate if any[answers] >0
