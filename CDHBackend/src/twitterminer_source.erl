@@ -4,7 +4,13 @@
 
 -record(account_keys, {api_key, api_secret,
                        access_token, access_token_secret}).
--define(Celebrities,"Kim Kardashian, Cristiano Ronaldo").
+%-define(Celebrities,"Kim Kardashian, Cristiano Ronaldo, 
+%        Barack Obama, Beyonce Knowles, Bill Gates, Britney Spears, 
+%        Jim Carrey, Justin Bieber,Justin Timberlake, Katy Perry, 
+%        Rihanna Fenty, Taylor Swift").
+
+-define(Celebrities,"@Cristiano , @KimKardashian, @jtimberlake, @rihanna, @taylorswift13, 
+        @BarackObama, @katypery, @justinbieber, @BillGates, @Beyonce, @JimCarrey, @britneyspears").
 
 start() -> spawn (fun twitter_example/0).
 
@@ -40,9 +46,9 @@ twitter_example() ->
   register(miner,spawn_link(fun () ->
         receive
           terminate -> 
-            twitterminer_pipeline:terminate(P),
-            Res = twitterminer_pipeline:join(P),
-            Res
+            twitterminer_pipeline:terminate(P)
+%            Res = twitterminer_pipeline:join(P),
+%            Res
             
         %after 40000 -> % Sleep fo 60 s, changed to 40 s
         %    twitterminer_pipeline:terminate(P)

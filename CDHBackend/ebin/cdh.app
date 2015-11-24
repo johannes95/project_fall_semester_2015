@@ -1,0 +1,9 @@
+{application,cdh,
+             [{description,[]},
+              {vsn,"1"},
+              {registered,[broadcaster,bridge,main,parser,comLayer,miner]},
+              {applications,[kernel,stdlib,ssl,ibrowse,jiffy,oauth]},
+              {env,[]},
+              {modules,[battle_module,bridge,broadcaster,communication_layer,
+                        main,parser,twitterminer_pipeline,
+                        twitterminer_source]}]}.

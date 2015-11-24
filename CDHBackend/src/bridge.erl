@@ -53,7 +53,7 @@ bridge_loop() ->
         %Url = "https://celebrity-database-arnolf.c9.io/Database/Battle.php",
         %FormData = "session=bar&attacker=buzz".
         %ibrowse:send_req(Url, [{"Content-Type", "application/x-www-form-urlencoded"}], post, FormData).
-       ok = sendMsg(Session, Celeb, HP11, HP21, Tweet),
+        ok = sendMsg(Session, Celeb, HP11, HP21, Tweet),
         bridge_loop()
   end.
   
@@ -76,6 +76,7 @@ sendMsg(Session, Celeb, HP11, HP21, Tweet) ->
         Url = "https://celebrity-database-arnolf.c9.io/Database/Battle.php",
         {ok, _ResponseNum, _Headers, Response}=ibrowse:send_req(Url, [{"Content-Type", "application/x-www-form-urlencoded"}], post, FormData),
         {[{_Success,Boolean}]} = jiffy:decode(Response),
+        %1/0,
         %io:format("Answer:~p~nAttacker:~p HP1:~p HP2:~p~n", [Response,Celeb,HP11,HP21]),
         %io:format("FormData:~p~n", [FormData]),
         case Boolean of
