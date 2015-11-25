@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2015 at 11:50 AM
+-- Generation Time: Nov 25, 2015 at 12:00 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.13
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `CelebDeath`
 --
+CREATE DATABASE IF NOT EXISTS `CelebDeath` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `CelebDeath`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `celebs`
 --
 
+DROP TABLE IF EXISTS `celebs`;
 CREATE TABLE IF NOT EXISTS `celebs` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Handle` varchar(25) NOT NULL,
@@ -62,6 +65,7 @@ INSERT INTO `celebs` (`ID`, `Handle`, `Name`, `Picture`, `Followers`, `HP`, `Lev
 -- Table structure for table `inventory`
 --
 
+DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE IF NOT EXISTS `inventory` (
   `UserID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `CelebID` int(11) NOT NULL,
@@ -75,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 -- Table structure for table `queue`
 --
 
+DROP TABLE IF EXISTS `queue`;
 CREATE TABLE IF NOT EXISTS `queue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Session` text NOT NULL,
@@ -92,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `queue` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `oauth_uid` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
