@@ -1,7 +1,7 @@
 <?php
 	header('Access-Control-Allow-Origin: *');	
 	$ip = "0.0.0.0";
-	$user = "arnolf";
+	$user = getenv('C9_USER'); //Define database username
 	$db = "CelebDeath";
 	
 	if (!empty($_GET)) {

@@ -13,10 +13,10 @@ com_sup(Count) ->
 	{ok, _Pid} = start_server(),
 	receive
 		{'EXIT', _From, normal} ->
-			ok;	%Nothing happens
+			exit(normal);	%Nothing happens
 		{'EXIT', _From, _Reason} ->
 			case (Count > 3) of
-				true -> io:format("Terminating server!~n", []);	%Alert the proper guy..
+				true -> 1/0, io:format("Terminating server!~n", []);	%Alert the proper guy..
 				false -> com_sup(Count+1)
 			end
 	end.

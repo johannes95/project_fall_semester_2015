@@ -35,7 +35,7 @@ battle_loop(Session, Celeb1, HP1, Celeb2, HP2) ->
       {tweet, Celebrity, Tweet} -> 
         case Celebrity of
           Celeb1 -> 
-            bridge ! {battle, Session, Celeb1, HP1, HP2-1, Tweet}, 
+            bridge ! {battle, Session, Celeb1, HP1, HP2-1, Tweet},
             battle_loop(Session, Celeb1, HP1, Celeb2, HP2-1);
           Celeb2 -> 
             bridge ! {battle, Session, Celeb2, HP1-1, HP2, Tweet},

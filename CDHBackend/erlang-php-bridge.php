@@ -50,7 +50,7 @@ if (!empty($_POST)) {
 else if(!empty($_GET['error'])) {
   //HARD CODED HERE!!!!
   echo '<script src="https://frontend-arnolf.c9users.io/Website/js/battle/Game.js">'
-    , 'addToQueue("'.$_GET['error'].'");'
+    , 'addToQueue("crash");'
     , '</script>';
               
   echo '<script type="text/javascript" charset="utf-8">'

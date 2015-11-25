@@ -2,11 +2,11 @@
 -export([start/0]).
 
 start() ->
-  spawn_link(fun broadcaster_sup/0).
+  spawn_link(fun() -> broadcaster_sup(0) end).
 
 % Superviser for the broadcaster. It starts the loop (server) and if it receives 
 % an Exit other than normal it restarts the process.
-broadcaster_sup() ->
+broadcaster_sup(Count) ->
   process_flag(trap_exit, true),
   {ok, _Pid} = broadcaster_start_link(),
   receive
@@ -15,8 +15,10 @@ broadcaster_sup() ->
           % Our server will never terminate normally,
           % so this is really redundant for now.
     {'EXIT', _From, _Reason} ->
-      %io:format("Process ~p exited for reason ~p~n",[Pid,Reason]),
-      broadcaster_sup() % Crash: restart
+      case (Count > 3) of
+        true -> 1/0;
+        false -> broadcaster_sup(Count+1)   %Restart
+      end %Case
   end.
 
 % Start the server and register it when it is not registered.

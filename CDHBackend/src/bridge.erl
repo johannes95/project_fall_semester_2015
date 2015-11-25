@@ -2,9 +2,9 @@
 -export([start/0]).
 
 start() ->
-  spawn_link(fun bridge_sup/0).
+  spawn_link(fun() -> bridge_sup(0) end).
 
-bridge_sup() ->
+bridge_sup(Count) ->
   process_flag(trap_exit, true),
   {ok, _Pid} = bridge_start_link(),
   receive
@@ -13,8 +13,10 @@ bridge_sup() ->
           % Our server will never terminate normally,
           % so this is really redundant for now.
     {'EXIT', _From, _Reason} ->
-      %io:format("Process ~p exited for reason ~p~n",[Pid,Reason]),
-      bridge_sup() % Crash: restart
+      case (Count > 3) of
+        true -> 1/0;
+        false -> bridge_sup(Count+1)   %Restart
+      end %Case
   end.
 
 % Start the server and register it when it is not registered.
@@ -73,7 +75,7 @@ bridge_loop() ->
 
 sendMsg(Session, Celeb, HP11, HP21, Tweet) ->
         FormData = "session="++Session++"&attacker="++Celeb++"&hp1="++HP11++"&hp2="++HP21++"&tweet="++Tweet,
-        Url = "https://celebrity-database-arnolf.c9.io/Database/Battle.php",
+        Url = "https://celebrity-database-arnolf.c9users.io/Database/Battle.php",
         {ok, _ResponseNum, _Headers, Response}=ibrowse:send_req(Url, [{"Content-Type", "application/x-www-form-urlencoded"}], post, FormData),
         {[{_Success,Boolean}]} = jiffy:decode(Response),
         %1/0,
