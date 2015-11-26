@@ -108,6 +108,7 @@ nav{
 .tweetBox {
     background:white;
     border:1px solid black;
+    overflow-y:scroll;
 }
 
 /*NEW*/
