@@ -26,84 +26,9 @@ function start(sess, celeb1, h1, celeb2, h2){
 	
 	board = document.getElementById("board"); 	  // Get the context to draw on, the html canvas reference(battle.html)
 	
-	switch(celeb1) {
-		case "Kim Kardashian":
-			playerCelebrity = new KimKardashian();
-			break;
-		case "Cristiano Ronaldo":
-			playerCelebrity = new CristianoRonaldo();
-			break;
-		case "Rihanna Fenty":
-			playerCelebrity = new RihannaFenty();
-			break;
-		case "Beyonce Knowles":
-			playerCelebrity = new Beyonce();
-			break;
-		case "Bill Gates":
-			playerCelebrity = new BillGates();
-			break;
-		case "Katy Perry":
-			playerCelebrity = new KatyPerry();
-			break;
-		case "Justin Bieber":
-			playerCelebrity = new JustinBieber();
-			break;
-		case "Justin Timberlake":
-			playerCelebrity = new JustinTimberlake();
-			break;
-		case "Jim Carrey":
-			playerCelebrity = new JimCarrey();
-			break;
-		case "Barack Obama":
-			playerCelebrity = new BarackObama();
-			break;
-		case "Taylor Swift":
-			playerCelebrity = new TaylorSwift();
-			break;
-		case "Britney Spears":
-			playerCelebrity = new BritneySpears();
-			break;
-	}
-	
-	switch(celeb2) {
-		case "Kim Kardashian":
-			cpuCelebrity = new KimKardashian();
-			break;
-		case "Cristiano Ronaldo":
-			cpuCelebrity = new CristianoRonaldo();
-			break;
-		case "Rihanna Fenty":
-			cpuCelebrity = new RihannaFenty();
-			break;
-		case "Beyonce Knowles":
-			cpuCelebrity = new Beyonce();
-			break;
-		case "Bill Gates":
-			cpuCelebrity = new BillGates();
-			break;
-		case "Katy Perry":
-			cpuCelebrity = new KatyPerry();
-			break;
-		case "Justin Bieber":
-			cpuCelebrity = new JustinBieber();
-			break;
-		case "Justin Timberlake":
-			cpuCelebrity = new JustinTimberlake();
-			break;
-		case "Jim Carrey":
-			cpuCelebrity = new JimCarrey();
-			break;
-		case "Barack Obama":
-			cpuCelebrity = new BarackObama();
-			break;
-		case "Taylor Swift":
-			cpuCelebrity = new TaylorSwift();
-			break;
-		case "Britney Spears":
-			cpuCelebrity = new BritneySpears();
-			break;
-	}
-	
+	playerCelebrity = new NewCeleb(celeb1, 75, 100);
+	cpuCelebrity = new NewCeleb(celeb2, 75, 100);
+
 	character = new Character(positionP1,0,playerCelebrity, false); 			  // Initializes a character(Character.js)
 	character2 = new Character(positionP2,0,cpuCelebrity, true);
 

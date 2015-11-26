@@ -1,7 +1,7 @@
 var leftKey = 37, upKey = 38, rightKey = 39, downKey = 40, spaceBar = 32; // Storing the key codes(keymaster.js)
 
 /* Defines the character to be used by the user */
-// x = starting x possition
+// x = starting x position
 // y = starting y position
 // celebrity = selected celebrity
 // isPlayer = true if the character is controlled by the player of the game
