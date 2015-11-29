@@ -3,20 +3,14 @@ var tweetDivArray = [];
 
 function addTweet(celebrity, tweet) {
     
-    if(tweetDivArray.length == 4) { // If the number of tweets in the tweet visualization reaches its limit(4)
-        tweetDivArray[0].parentNode.removeChild(tweetDivArray[0]); // Remove the first tweetBox(the one at the top)
-        tweetDivArray.splice(0,1); // Remove the div from the array
-    }
-    
     // Set the parameters
     var w = tweetWrapperWidth/1.1, h = tweetWrapperHeight/5, x = (tweetWrapperWidth-w)/2, y = (tweetWrapperHeight - h*4)/5;
 	
 	// Create the div(tweet box) and add css styling
 	var div = document.createElement("div");
-	div.style.width = w + "px";
-	div.style.height = h + "px";
-	div.style.marginTop = y;
+	div.style.marginTop = y - h; // Initialize on top of position for slide effect
 	div.style.marginLeft = x;
+	div.style.marginRight = "5px";
 	div.className = 'tweetBox';
 	
 	// Create the span(for @CelebrityName), add css styling and add the span to the div
@@ -82,5 +76,27 @@ function addTweet(celebrity, tweet) {
 	} else { // If there is no tweets
 	    parent.appendChild(div); // Add the div to the #tweetWrapper div
 	}
+
+	// Animate the fade in(for the latest tweet)
+	$(".tweetBox:first").css("opacity", 0);
+	
+	$(".tweetBox:first").animate({
+		opacity:1
+	},{    
+		duration: 2000,
+    	queue: false,
+    	complete: function() { /* Animation complete */ }
+	});
+	
+	// Animate the slide down
+	$(".tweetBox").animate({
+		"top": "+=" + h + "px"
+		
+	},{
+		duration: 1000,
+    	queue: false,
+    	complete: function() { /* Animation complete */ }
+	}	 
+	);
     
 }
