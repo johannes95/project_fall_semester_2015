@@ -79,7 +79,6 @@ nav{
 }
 
 #game {
-    /*NEW*/
     margin-left:auto;
     margin-right:auto;
     margin-left:140px;
@@ -88,13 +87,11 @@ nav{
 }
 
 #board {
-    /*NEW*/
     width:600px; 
     height:500px;
     float:left;
 }
 
-/*NEW*/
 #tweetWrapper {
     background:rgba(207, 226, 243, 1);/*"#cfe2f3"*/;
     width:196px;
@@ -102,15 +99,18 @@ nav{
     float:left;
     margin:0;
     border:2px solid #3c78d8;
+    overflow-y:scroll;
 }
 
-/*NEW*/
 .tweetBox {
     background:white;
     border:1px solid black;
+    position:relative;
+    height:auto;
+    overflow:hidden;
+    padding:10px;
 }
 
-/*NEW*/
 .tweetBoxTitle {
     color:#3c78d8;
     font-weight:bold;
@@ -119,12 +119,11 @@ nav{
     float:left;
     margin-top:5px;
 }
- /*NEW*/
+
 .tweetBoxContent {
     margin-left:10px;
 }
 
-/*NEW*/
 .tweetBoxAtText {
     font-weight:bold;
 }
