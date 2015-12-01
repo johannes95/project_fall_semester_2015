@@ -11,12 +11,10 @@ broadcaster_sup(Count) ->
   {ok, _Pid} = broadcaster_start_link(),
   receive
     {'EXIT', _From, normal} ->
-      ok; % Normal termination
-          % Our server will never terminate normally,
-          % so this is really redundant for now.
+      exit(normal);
     {'EXIT', _From, _Reason} ->
       case (Count > 3) of
-        true -> 1/0;
+        true -> exit(error);
         false -> broadcaster_sup(Count+1)   %Restart
       end %Case
   end.
@@ -36,15 +34,42 @@ broadcaster_start_link() ->
 % it can unregsiter, or the broadcaster can get a msg to pass to all listeners.
 broadcaster_loop(Listeners) ->
   receive
-    {parser, Celebrity, Tweet} -> 
-      [Pid ! {tweet, Celebrity, Tweet} || {Pid, C1, C2} <- Listeners, lists:member(Celebrity ,[C1, C2])],
+    
+    {start, Session, Celeb1, Hp1, Celeb2, Hp2} ->
+      spawn(fun() -> battle_module:start(Session, Celeb1, Hp1, Celeb2, Hp2) end),
       broadcaster_loop(Listeners);
-    {register, Pid, C1, C2} ->
+      
+    {register, Pid, Session, C1, C2} ->
       Pid ! {ok, registered},
-      broadcaster_loop([{Pid, C1, C2}|Listeners]);
-    {unregister, Pid, C1, C2} ->
+      broadcaster_loop([{Pid, Session, C1, C2} | Listeners]);
+      
+    {unregister, Pid, Session, C1, C2} ->
       Pid ! {ok, unregistered},
-      broadcaster_loop(lists:delete({Pid, C1, C2}, Listeners));
-    terminate ->
-      exit(normal)
+      broadcaster_loop(lists:delete({Pid, Session, C1, C2}, Listeners));
+    
+    {terminate, all} ->
+      [begin
+          io:format("~p ! terminate_all ~n", [Pid]), 
+          Pid ! terminate_all,
+          receive
+            {ok, Pid} ->
+              io:format("received: {ok,~p} ~n", [Pid]), 
+              ok
+          end 
+        end
+        || {Pid, _Session, _C1, _C2} <- Listeners],
+        main ! {broadcaster, terminated},
+        exit(normal);
+    
+    {terminate, Session} ->
+      case lists:keyfind(Session, 2, Listeners) of
+        {Pid, Session, C1, C2} -> 
+          Pid ! terminate,
+          broadcaster_loop(lists:delete({Pid, Session, C1, C2}, Listeners));
+        false -> broadcaster_loop(Listeners)
+      end;
+    
+    {parser, Celebrity, Tweet} -> 
+      [Pid ! {tweet, Celebrity, Tweet} || {Pid, _Session, C1, C2} <- Listeners, lists:member(Celebrity ,[C1, C2])],
+      broadcaster_loop(Listeners)
   end.

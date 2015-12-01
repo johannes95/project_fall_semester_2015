@@ -9,10 +9,27 @@
 %        Jim Carrey, Justin Bieber,Justin Timberlake, Katy Perry, 
 %        Rihanna Fenty, Taylor Swift").
 
--define(Celebrities,"@Cristiano , @KimKardashian, @jtimberlake, @rihanna, @taylorswift13, 
-        @BarackObama, @katypery, @justinbieber, @BillGates, @Beyonce, @JimCarrey, @britneyspears").
+-define(Celebrities,"@Cristiano, @KimKardashian, @jtimberlake, @rihanna, @taylorswift13, 
+        @BarackObama, @katyperry, @justinbieber, @BillGates, @Beyonce, @JimCarrey, @britneyspears").
 
-start() -> spawn (fun twitter_example/0).
+start() ->
+    spawn_link(fun miner_sup/0).
+
+% Superviser checks if the module ends correctly, otherwise it restarts it.
+miner_sup() ->
+    process_flag(trap_exit, true),
+    {ok, _Pid} = miner_start_link(),
+    receive
+        {'EXIT', _From, normal} ->
+            exit(normal);
+        {'EXIT', _From, _Reason} ->
+            exit(error)
+    end.    %Receive
+    
+miner_start_link() ->
+    P = spawn_link(fun twitter_example/0),
+    {ok, P}.
+
 
 keyfind(Key, L) ->
   {Key, V} = lists:keyfind(Key, 1, L),
@@ -43,10 +60,11 @@ twitter_example() ->
   % Receives the terminate question only when the whole system is closed.
   % Can be manually closed by sending a msg of terminate to the registered
   % process miner.
-  register(miner,spawn_link(fun () ->
+  register(miner, spawn_link(fun () ->
         receive
           terminate -> 
-            twitterminer_pipeline:terminate(P)
+            twitterminer_pipeline:terminate(P),
+            exit(normal)
 %            Res = twitterminer_pipeline:join(P),
 %            Res
             
@@ -165,7 +183,7 @@ extract(K, L) ->
 decorate_with_id(B) ->
   case jiffy:decode(B) of
     {L} ->            %%---Might change to id_str---%%
-      case lists:keyfind(<<"id">>, 1, L) of
+      case lists:keyfind(<<"id_str">>, 1, L) of
         {_, I} -> {parsed_tweet, L, B, {id, I}};
         false  -> {parsed_tweet, L, B, no_id}
       end;
@@ -182,9 +200,9 @@ my_print(T) ->
       case extract(<<"text">>, L) of				%%Loss of data here, as good as fixed...
         {found, TT} -> 
           %parser ! {unicode:characters_to_list(TT, utf8)};"
-          parser ! {TT},
+          parser ! {TT};
           %TT2 = binary_to_list(TT),
-          io:format("Tweets: ~ts~n", [TT]);		%%--ADDED LINE BREAK PLUS FUN-CALL
+          %io:format("Tweets: ~ts~n", [TT]);		%%--ADDED LINE BREAK PLUS FUN-CALL
           %Temp1 = unicode:characters_to_list(TT, utf8),
           %Temp = lists:flatten(Temp1),
           %Temp = io_lib:format("~s", Temp1),

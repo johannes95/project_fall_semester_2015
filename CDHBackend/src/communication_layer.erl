@@ -16,7 +16,7 @@ com_sup(Count) ->
 			exit(normal);	%Nothing happens
 		{'EXIT', _From, _Reason} ->
 			case (Count > 3) of
-				true -> 1/0, io:format("Terminating server!~n", []);	%Alert the proper guy..
+				true -> exit(error);	%Alert the proper guy..
 				false -> com_sup(Count+1)
 			end
 	end.
@@ -57,13 +57,20 @@ handler(ASocket) ->
 			gen_tcp:send(ASocket, "Exiting"),
 			gen_tcp:close(ASocket),
 			exit(normal);
-		{tcp, ASocket, _Msg} ->
-			{Session, Celeb1, Hp1, Celeb2, Hp2} = messageparser(stringparser(_Msg)),
+		{tcp, ASocket, Msg} ->
+			{Session, Celeb1, Hp1, Celeb2, Hp2} = messageparser(stringparser(Msg)),
 			{HP11, _L1} = string:to_integer(Hp1),
 			{HP21, _L2} = string:to_integer(Hp2),
 			gen_tcp:send(ASocket, "Received"), %Send a msg back to the erlang-bridge
-			%io:format("Session: ~p Celeb1: ~p HP1 ~p Celeb2 ~p HP2 ~p~n",[Session, Celeb1, HP11, Celeb2, HP21]),
-			spawn(fun() -> battle_module:start(Session, Celeb1, HP11, Celeb2, HP21) end),
+			
+			
+			case Celeb1 of
+				"terminate terminate" ->
+					broadcaster ! {terminate, Session};
+				_Else ->
+					broadcaster ! {start, Session, Celeb1, HP11, Celeb2, HP21}
+			end,
+			
 			handler(ASocket);
 		{tcp_closed, ASocket} -> %The php socket sends this kind of message..
    			do_something

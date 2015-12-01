@@ -1,5 +1,5 @@
 =erl_crash_dump:0.3
-Mon Nov 16 13:19:40 2015
+Fri Nov 27 18:28:18 2015
 Slogan: could not start kernel pid (application_controller) (error in config file "./twitterminer.config" (none): configuration file not found)
 System version: Erlang R16B03 (erts-5.10.4) [source] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
 Compiled: Tue Aug 19 16:45:11 2014
@@ -197,8 +197,8 @@ option smbcs: 1048576
 option mbcgs: 10
 option acul: 0
 option as: af
-mbcs blocks: 0 4 4
-mbcs blocks size: 0 7640 7640
+mbcs blocks: 0 1 1
+mbcs blocks size: 0 40 40
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -213,8 +213,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-temp_alloc calls: 17909
-temp_free calls: 17909
+temp_alloc calls: 1
+temp_free calls: 1
 temp_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -240,8 +240,8 @@ option smbcs: 1048576
 option mbcgs: 10
 option acul: 0
 option as: af
-mbcs blocks: 0 1 1
-mbcs blocks size: 0 40 40
+mbcs blocks: 0 4 4
+mbcs blocks size: 0 7640 7640
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -256,8 +256,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-temp_alloc calls: 1
-temp_free calls: 1
+temp_alloc calls: 17909
+temp_free calls: 17909
 temp_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -587,12 +587,12 @@ option mbcgs: 10
 option acul: 0
 option mbsd: 3
 option as: gf
-mbcs blocks: 0 259 259
-mbcs blocks size: 0 55400 55400
-mbcs carriers: 1 2 2
+mbcs blocks: 0 0 0
+mbcs blocks size: 0 0 0
+mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
-mbcs carriers size: 32872 295016 295016
+mbcs carriers size: 32872 32872 32872
 mbcs mseg carriers size: 0
 mbcs sys_alloc carriers size: 32872
 sbcs blocks: 0 0 0
@@ -603,11 +603,11 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-sl_alloc calls: 1363
-sl_free calls: 1363
+sl_alloc calls: 0
+sl_free calls: 0
 sl_realloc calls: 0
-mseg_alloc calls: 4
-mseg_dealloc calls: 4
+mseg_alloc calls: 0
+mseg_dealloc calls: 0
 mseg_realloc calls: 0
 sys_alloc calls: 1
 sys_free calls: 0
@@ -631,12 +631,12 @@ option mbcgs: 10
 option acul: 0
 option mbsd: 3
 option as: gf
-mbcs blocks: 0 0 0
-mbcs blocks size: 0 0 0
-mbcs carriers: 1 1 1
+mbcs blocks: 0 259 259
+mbcs blocks size: 0 55400 55400
+mbcs carriers: 1 2 2
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
-mbcs carriers size: 32872 32872 32872
+mbcs carriers size: 32872 295016 295016
 mbcs mseg carriers size: 0
 mbcs sys_alloc carriers size: 32872
 sbcs blocks: 0 0 0
@@ -647,11 +647,11 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-sl_alloc calls: 0
-sl_free calls: 0
+sl_alloc calls: 1363
+sl_free calls: 1363
 sl_realloc calls: 0
-mseg_alloc calls: 0
-mseg_dealloc calls: 0
+mseg_alloc calls: 4
+mseg_dealloc calls: 4
 mseg_realloc calls: 0
 sys_alloc calls: 1
 sys_free calls: 0
@@ -980,8 +980,8 @@ option smbcs: 262144
 option mbcgs: 10
 option acul: 0
 option as: bf
-mbcs blocks: 6 12 12
-mbcs blocks size: 1656 9744 9744
+mbcs blocks: 0 0 0
+mbcs blocks size: 0 0 0
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -996,8 +996,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-std_alloc calls: 56
-std_free calls: 50
+std_alloc calls: 0
+std_free calls: 0
 std_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -1023,8 +1023,8 @@ option smbcs: 262144
 option mbcgs: 10
 option acul: 0
 option as: bf
-mbcs blocks: 0 0 0
-mbcs blocks size: 0 0 0
+mbcs blocks: 6 12 12
+mbcs blocks size: 1656 9744 9744
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -1039,8 +1039,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-std_alloc calls: 0
-std_free calls: 0
+std_alloc calls: 56
+std_free calls: 50
 std_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -1413,13 +1413,13 @@ option mbcgs: 10
 option acul: 0
 option mbsd: 3
 option as: gf
-mbcs blocks: 2 12 12
-mbcs blocks size: 66976 263896 263896
-mbcs carriers: 2 2 2
-mbcs mseg carriers: 1
+mbcs blocks: 0 0 0
+mbcs blocks size: 0 0 0
+mbcs carriers: 1 1 1
+mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
-mbcs carriers size: 393320 393320 393320
-mbcs mseg carriers size: 262144
+mbcs carriers size: 131176 131176 131176
+mbcs mseg carriers size: 0
 mbcs sys_alloc carriers size: 131176
 sbcs blocks: 0 0 0
 sbcs blocks size: 0 0 0
@@ -1429,10 +1429,10 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-eheap_alloc calls: 121
-eheap_free calls: 119
-eheap_realloc calls: 7
-mseg_alloc calls: 1
+eheap_alloc calls: 0
+eheap_free calls: 0
+eheap_realloc calls: 0
+mseg_alloc calls: 0
 mseg_dealloc calls: 0
 mseg_realloc calls: 0
 sys_alloc calls: 1
@@ -1457,13 +1457,13 @@ option mbcgs: 10
 option acul: 0
 option mbsd: 3
 option as: gf
-mbcs blocks: 0 0 0
-mbcs blocks size: 0 0 0
-mbcs carriers: 1 1 1
-mbcs mseg carriers: 0
+mbcs blocks: 2 12 12
+mbcs blocks size: 66976 263896 263896
+mbcs carriers: 2 2 2
+mbcs mseg carriers: 1
 mbcs sys_alloc carriers: 1
-mbcs carriers size: 131176 131176 131176
-mbcs mseg carriers size: 0
+mbcs carriers size: 393320 393320 393320
+mbcs mseg carriers size: 262144
 mbcs sys_alloc carriers size: 131176
 sbcs blocks: 0 0 0
 sbcs blocks size: 0 0 0
@@ -1473,10 +1473,10 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-eheap_alloc calls: 0
-eheap_free calls: 0
-eheap_realloc calls: 0
-mseg_alloc calls: 0
+eheap_alloc calls: 121
+eheap_free calls: 119
+eheap_realloc calls: 7
+mseg_alloc calls: 1
 mseg_dealloc calls: 0
 mseg_realloc calls: 0
 sys_alloc calls: 1
@@ -2209,13 +2209,13 @@ option acul: 0
 option as: aobf
 fix type: driver_select_data_state 0 0
 fix type: driver_event_data_state 0 0
-fix type: nlink_sh 440 0
-fix type: monitor_sh 72 0
+fix type: nlink_sh 0 0
+fix type: monitor_sh 0 0
 fix type: sl_thr_q_element 0 0
 fix type: msg_ref 0 0
-fix type: proc 2784 0
-mbcs blocks: 16 18 18
-mbcs blocks size: 3536 4296 4296
+fix type: proc 0 0
+mbcs blocks: 0 0 0
+mbcs blocks size: 0 0 0
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -2230,8 +2230,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-fix_alloc calls: 401
-fix_free calls: 401
+fix_alloc calls: 0
+fix_free calls: 0
 fix_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -2259,13 +2259,13 @@ option acul: 0
 option as: aobf
 fix type: driver_select_data_state 0 0
 fix type: driver_event_data_state 0 0
-fix type: nlink_sh 0 0
-fix type: monitor_sh 0 0
+fix type: nlink_sh 440 0
+fix type: monitor_sh 72 0
 fix type: sl_thr_q_element 0 0
 fix type: msg_ref 0 0
-fix type: proc 0 0
-mbcs blocks: 0 0 0
-mbcs blocks size: 0 0 0
+fix type: proc 2784 0
+mbcs blocks: 16 18 18
+mbcs blocks size: 3536 4296 4296
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -2280,8 +2280,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-fix_alloc calls: 0
-fix_free calls: 0
+fix_alloc calls: 401
+fix_free calls: 401
 fix_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -2643,8 +2643,8 @@ option smbcs: 262144
 option mbcgs: 10
 option acul: 0
 option as: bf
-mbcs blocks: 6 12 12
-mbcs blocks size: 3520 7584 7584
+mbcs blocks: 0 0 0
+mbcs blocks size: 0 0 0
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -2659,8 +2659,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-binary_alloc calls: 312
-binary_free calls: 306
+binary_alloc calls: 0
+binary_free calls: 0
 binary_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -2686,8 +2686,8 @@ option smbcs: 262144
 option mbcgs: 10
 option acul: 0
 option as: bf
-mbcs blocks: 0 0 0
-mbcs blocks size: 0 0 0
+mbcs blocks: 6 12 12
+mbcs blocks size: 3520 7584 7584
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -2702,8 +2702,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-binary_alloc calls: 0
-binary_free calls: 0
+binary_alloc calls: 312
+binary_free calls: 306
 binary_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -3030,8 +3030,8 @@ option smbcs: 262144
 option mbcgs: 10
 option acul: 0
 option as: bf
-mbcs blocks: 0 13 13
-mbcs blocks size: 0 13328 13328
+mbcs blocks: 0 0 0
+mbcs blocks size: 0 0 0
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -3046,8 +3046,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-driver_alloc calls: 855
-driver_free calls: 855
+driver_alloc calls: 0
+driver_free calls: 0
 driver_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -3073,8 +3073,8 @@ option smbcs: 262144
 option mbcgs: 10
 option acul: 0
 option as: bf
-mbcs blocks: 0 0 0
-mbcs blocks size: 0 0 0
+mbcs blocks: 0 12 12
+mbcs blocks size: 0 12080 12080
 mbcs carriers: 1 1 1
 mbcs mseg carriers: 0
 mbcs sys_alloc carriers: 1
@@ -3089,8 +3089,8 @@ sbcs sys_alloc carriers: 0
 sbcs carriers size: 0 0 0
 sbcs mseg carriers size: 0
 sbcs sys_alloc carriers size: 0
-driver_alloc calls: 0
-driver_free calls: 0
+driver_alloc calls: 855
+driver_free calls: 855
 driver_realloc calls: 0
 mseg_alloc calls: 0
 mseg_dealloc calls: 0
@@ -3362,15 +3362,15 @@ option amcbf: 4194304
 option rmcbf: 20
 option mcs: 10
 memory kind: all memory
-cached_segments: 1
-cache_hits: 3
-segments: 1 2 2
-segments_size: 262144 524288 524288
-segments_watermark: 2
-mseg_alloc calls: 5
-mseg_dealloc calls: 4
+cached_segments: 0
+cache_hits: 0
+segments: 0 0 0
+segments_size: 0 0 0
+segments_watermark: 0
+mseg_alloc calls: 0
+mseg_dealloc calls: 0
 mseg_realloc calls: 0
-mseg_create calls: 2
+mseg_create calls: 0
 mseg_create_resize calls: 0
 mseg_destroy calls: 0
 mseg_recreate calls: 0
@@ -3383,15 +3383,15 @@ option amcbf: 4194304
 option rmcbf: 20
 option mcs: 10
 memory kind: all memory
-cached_segments: 0
-cache_hits: 0
-segments: 0 0 0
-segments_size: 0 0 0
-segments_watermark: 0
-mseg_alloc calls: 0
-mseg_dealloc calls: 0
+cached_segments: 1
+cache_hits: 3
+segments: 1 2 2
+segments_size: 262144 524288 524288
+segments_watermark: 2
+mseg_alloc calls: 5
+mseg_dealloc calls: 4
 mseg_realloc calls: 0
-mseg_create calls: 0
+mseg_create calls: 2
 mseg_create_resize calls: 0
 mseg_destroy calls: 0
 mseg_recreate calls: 0
@@ -3518,7 +3518,7 @@ Name: init
 Spawned as: otp_ring0:start/2
 Last scheduled in for: erlang:bif_return_trap/1
 Spawned by: []
-Started: Mon Nov 16 13:19:40 2015
+Started: Fri Nov 27 18:28:18 2015
 Message queue length: 1
 Number of heap fragments: 0
 Heap fragment data: 0
@@ -3559,274 +3559,274 @@ Current size: 1464
 Module: prim_zip
 Uniq: 76810209
 Index: 0
-Address: 0x00007f12f3acf940
+Address: 0x00007f812930f940
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 1
-Address: 0x00007f12f3acf8e8
+Address: 0x00007f812930f8e8
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 2
-Address: 0x00007f12f3acf8b0
+Address: 0x00007f812930f8b0
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 3
-Address: 0x00007f12f3acf878
+Address: 0x00007f812930f878
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 4
-Address: 0x00007f12f3acf808
+Address: 0x00007f812930f808
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 5
-Address: 0x00007f12f3acf7a8
+Address: 0x00007f812930f7a8
 Refc: 1
 =fun
 Module: prim_zip
 Uniq: 76810209
 Index: 6
-Address: 0x00007f12f3acf750
+Address: 0x00007f812930f750
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 20
-Address: 0x00007f12f3b30d08
+Address: 0x00007f8129370d08
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 3
-Address: 0x00007f12f3ae07c0
+Address: 0x00007f81293207c0
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 2
-Address: 0x00007f12f3ae07f8
+Address: 0x00007f81293207f8
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 17
-Address: 0x00007f12f3b310d0
+Address: 0x00007f81293710d0
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 1
-Address: 0x00007f12f3ae0830
+Address: 0x00007f8129320830
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 16
-Address: 0x00007f12f3b31100
+Address: 0x00007f8129371100
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 0
-Address: 0x00007f12f3ae0868
+Address: 0x00007f8129320868
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 19
-Address: 0x00007f12f3b30f00
+Address: 0x00007f8129370f00
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 18
-Address: 0x00007f12f3b31098
+Address: 0x00007f8129371098
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 13
-Address: 0x00007f12f3b31d00
+Address: 0x00007f8129371d00
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 5
-Address: 0x00007f12f3ae0518
+Address: 0x00007f8129320518
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 12
-Address: 0x00007f12f3b31eb0
+Address: 0x00007f8129371eb0
 Refc: 1
 =fun
 Module: prim_file
 Uniq: 114309672
 Index: 4
-Address: 0x00007f12f3ae0620
+Address: 0x00007f8129320620
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 15
-Address: 0x00007f12f3b314f0
+Address: 0x00007f81293714f0
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 14
-Address: 0x00007f12f3b31770
+Address: 0x00007f8129371770
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 9
-Address: 0x00007f12f3b32200
+Address: 0x00007f8129372200
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 8
-Address: 0x00007f12f3b32368
+Address: 0x00007f8129372368
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 11
-Address: 0x00007f12f3b31f30
+Address: 0x00007f8129371f30
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 10
-Address: 0x00007f12f3b32098
+Address: 0x00007f8129372098
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 5
-Address: 0x00007f12f3b327a0
+Address: 0x00007f81293727a0
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 4
-Address: 0x00007f12f3b328d8
+Address: 0x00007f81293728d8
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 7
-Address: 0x00007f12f3b324d0
+Address: 0x00007f81293724d0
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 6
-Address: 0x00007f12f3b32638
+Address: 0x00007f8129372638
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 1
-Address: 0x00007f12f3b32d20
+Address: 0x00007f8129372d20
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 0
-Address: 0x00007f12f3b32e98
+Address: 0x00007f8129372e98
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 3
-Address: 0x00007f12f3b32a50
+Address: 0x00007f8129372a50
 Refc: 1
 =fun
 Module: erl_prim_loader
 Uniq: 109387729
 Index: 2
-Address: 0x00007f12f3b32bb8
+Address: 0x00007f8129372bb8
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 8
-Address: 0x00007f12f3abf150
+Address: 0x00007f81292ff150
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 6
-Address: 0x00007f12f3abf1e0
+Address: 0x00007f81292ff1e0
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 7
-Address: 0x00007f12f3abf1a8
+Address: 0x00007f81292ff1a8
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 4
-Address: 0x00007f12f3abf910
+Address: 0x00007f81292ff910
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 5
-Address: 0x00007f12f3abf510
+Address: 0x00007f81292ff510
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 2
-Address: 0x00007f12f3abfaf0
+Address: 0x00007f81292ffaf0
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 3
-Address: 0x00007f12f3abfa90
+Address: 0x00007f81292ffa90
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 0
-Address: 0x00007f12f3abfb60
+Address: 0x00007f81292ffb60
 Refc: 1
 =fun
 Module: init
 Uniq: 44948734
 Index: 1
-Address: 0x00007f12f3abfb28
+Address: 0x00007f81292ffb28
 Refc: 1
 =fun
 Module: erlang
 Uniq: 117156064
 Index: 0
-Address: 0x00007f12f3b126c0
+Address: 0x00007f81293526c0
 Refc: 1
 =proc_messages:<0.0.0>
-H7F12E3A65F10:N
+H7F81192A5F10:N
 =proc_stack:<0.0.0>
-0x00007f12e3a6ad38:SReturn addr 0xF3AB3000 (init:boot_loop/2 + 2800)
-0x00007f12e3a6ad40:SReturn addr 0x8441C8 (<terminate process normally>)
+0x00007f81192aad38:SReturn addr 0x292F3000 (init:boot_loop/2 + 2800)
+0x00007f81192aad40:SReturn addr 0x8441C8 (<terminate process normally>)
 y0:P<0.2.0>
 =proc_heap:<0.0.0>
-7F12E3A65F10:t3:A4:EXIT,P<0.2.0>,A6:killed
+7F81192A5F10:t3:A4:EXIT,P<0.2.0>,A6:killed
 =atoms
 'Argument__1'
 'Argument__2'

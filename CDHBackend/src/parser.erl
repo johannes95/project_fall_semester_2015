@@ -11,11 +11,10 @@ parser_sup(Count) ->
     {ok, _Pid} = parser_start_link(),
     receive
         {'EXIT', _From, normal} ->
-            %Do nothing
-            ok;
+            exit(normal);
         {'EXIT', _From, _Reason} ->
             case (Count > 3) of
-                true -> supersup ! {error, parser};
+                true -> exit(error);
                 false -> parser_sup(Count+1)   %Restart
             end %Case
     end.    %Receive
@@ -44,43 +43,43 @@ init() ->
 findname(Tweet) ->
     % here we add the celebrities and their names we want to check for.
     % Highly assosiated with the list in twitterminer_source as defined celebrities.
-        CelebNames = [
-        {"Cristiano Ronaldo", "@Cristiano"},
-        {"Kim Kardashian", "@KimKardashian"},
-        {"Justin Timberlake", "@jtimberlake"},
-        {"Rihanna Fenty", "@rihanna"},
-        {"Taylor Swift", "@taylorswift13"},
-        {"Barack Obama", "@BarackObama"},
-        {"Kate Perry", "@katypery"},
-        {"Justin Bieber", "@justinbieber"},
-        {"Bill Gates", "@BillGates"},
-        {"Beyonce Knowles", "@Beyonce"},
-        {"Jim Carrey", "@JimCarrey"},
-        {"Britney Spears", "@britneyspears"}
-    ],
+    %    CelebNames = [
+    %    {"Cristiano Ronaldo", "@Cristiano"},
+    %    {"Kim Kardashian", "@KimKardashian"},
+    %    {"Justin Timberlake", "@jtimberlake"},
+    %    {"Rihanna Fenty", "@rihanna"},
+    %    {"Taylor Swift", "@taylorswift13"},
+    %    {"Barack Obama", "@BarackObama"},
+    %    {"Kate Perry", "@katypery"},
+    %    {"Justin Bieber", "@justinbieber"},
+    %    {"Bill Gates", "@BillGates"},
+    %    {"Beyonce Knowles", "@Beyonce"},
+    %    {"Jim Carrey", "@JimCarrey"},
+    %    {"Britney Spears", "@britneyspears"}
+    %],
     
     %Checks if any of Aliases of each celebrity is found.
-    Celebrity = [Proper || {Proper, Alias1} <- CelebNames, lists:member(true, [string:str(Tweet, Alias) > 0 || Alias <- [Alias1]])],
+    %Celebrity = [Proper || {Proper, Alias1} <- CelebNames, lists:member(true, [string:str(Tweet, Alias) > 0 || Alias <- [Alias1]])],
     
     
     
-    % CelebNames = [
-    %     {"Cristiano Ronaldo", "cristiano", "ronaldo", "@cristiano"},
-    %     {"Kim Kardashian", "kim", "kardashian", "@kimkardashian"},
-    %     {"Justin Timberlake", "justin", "timberlake", "@jtimberlake"},
-    %     {"Rihanna Fenty", "rihanna", "fenty", "@rihanna"},
-    %     {"Taylor Swift", "taylor", "swift", "@taylorswift13"},
-    %     {"Barack Obama", "barack", "obama", "@barackobama"},
-    %     {"Kate Perry", "kate", "perry", "@katypery"},
-    %     {"Justin Bieber", "justin", "bieber", "@justinbieber"},
-    %     {"Bill Gates", "bill", "gates", "@billgates"},
-    %     {"Beyonce Knowles", "beyonce", "knowles", "@beyonce"},
-    %     {"Jim Carrey", "jim", "carrey", "@jimcarrey"},
-    %     {"Britney Spears", "britney", "spears", "@britneyspears"}
-    % ],
+     CelebNames = [
+         {"Cristiano Ronaldo", "@Cristiano"},
+         {"Kim Kardashian", "@KimKardashian"},
+         {"Justin Timberlake", "@jtimberlake"},
+         {"Rihanna Fenty", "@rihanna"},
+         {"Taylor Swift", "@taylorswift13"},
+         {"Barack Obama", "@BarackObama"},
+         {"Kate Perry", "@katypery"},
+         {"Justin Bieber", "@justinbieber"},
+         {"Bill Gates", "@BillGates"},
+         {"Beyonce Knowles", "@Beyonce"},
+         {"Jim Carrey", "@JimCarrey"},
+         {"Britney Spears", "@britneyspears"}
+     ],
     
     % %Checks if any of Aliases of each celebrity is found.
-    % Celebrity = [Proper || {Proper, Alias1, Alias2, Alias3} <- CelebNames, lists:member(true, [string:str(string:to_lower(Tweet), Alias) > 0 || Alias <- [Alias1, Alias2, Alias3]])],
+     Celebrity = [Proper || {Proper, Alias1} <- CelebNames, lists:member(true, [string:str(Tweet, Alias) > 0 || Alias <- [Alias1]])],
     
     Celebrity.
     

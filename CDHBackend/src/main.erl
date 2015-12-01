@@ -1,5 +1,5 @@
 -module(main).
-
+% erl -pa deps/*/ebin -pa ebin -config cdh
 %-behaviour(application).
 
 -export([start/0, loop/0, super_sup/0, stop/0, restart/0]).
@@ -11,7 +11,7 @@ start() ->
 
 restart() -> %Not the most elegant but will do for now.
   miner!terminate,
-  spawn(fun twitterminer_source:start/0).
+  spawn_link(fun twitterminer_source:start/0).
 
 % Main server loop. start spawns the main sup, stop sends a terminate msg to all the started modules.
 loop() ->
@@ -21,10 +21,13 @@ loop() ->
       loop();
     {stop, Pid} ->
       comLayer ! terminate,
-      broadcaster ! terminate,
       parser ! terminate,
-      bridge ! terminate,
       miner ! terminate,
+      broadcaster ! {terminate, all},
+      receive
+        {broadcaster, terminated} -> ok
+      end,
+      bridge ! terminate,
       Pid ! stopped,
       exit(normal)
       
@@ -51,12 +54,12 @@ super_sup() ->
             io:format("SuperSupervisor restarting everything!~n", []),
             
             %%Send a message though a socket@10000 to say that the server crashed
-            ibrowse:send_req("https://backend-arnolf.c9users.io/CDHBackend/erlang-php-bridge.php?error=%22crash%22", [], get),
+            %ibrowse:send_req("https://backend-killacann.c9users.io/CDHBackend/erlang-php-bridge.php?error=%22crash%22", [], get),
             %---Start bridge first!...%%
             case whereis(broadcaster) of
                 undefined -> ok;
                 _PidB -> 
-                    broadcaster ! terminate
+                    broadcaster ! {terminate, all}
             end,
             case whereis(parser) of
                 undefined -> ok;
