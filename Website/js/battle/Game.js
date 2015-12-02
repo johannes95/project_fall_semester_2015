@@ -25,9 +25,10 @@ function start(sess, celeb1, h1, celeb2, h2){
         	event.returnValue = "If you leave it will count as a loss.";
     };
     window.onunload = function(event) {
-		if (!gameover)
+		if (!gameover) {
         	updateStats("lost");
         	cancelBattleBack();
+		}
     };
     
 	gameover = false;

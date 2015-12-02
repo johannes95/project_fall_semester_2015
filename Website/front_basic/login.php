@@ -34,10 +34,11 @@ if(isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_t
 		$url = $getUserDataURL;
 
 		$fields = array(
-		    'userid' => $user_info->id,
-		    'username' => $user_info->screen_name,
-		    'access_token' => $access_token['oauth_token'],
-		    'access_secret' => $access_token['oauth_token_secret']
+			'userid' => $user_info->id,
+			'username' => $user_info->screen_name,
+			'profile_image' => $user_info->profile_image_url,
+			'access_token' => $access_token['oauth_token'],
+			'access_secret' => $access_token['oauth_token_secret']
 		);
 
 		//url-ify the data for the POST

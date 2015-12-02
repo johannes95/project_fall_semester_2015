@@ -7,9 +7,10 @@ include_once ("functions.php");
         $username = $_POST['username'];
         $access_token = $_POST['access_token'];
         $access_secret = $_POST['access_secret'];
+        $profile_image = $_POST['profile_image'];
         //$oauth_uid,$username,$oauth_token,$oauth_secret
         $db_user = new Users();
-        print_r( $db_user->checkUser($userid,$username,$access_token, $access_secret));
+        print_r( $db_user->checkUser($userid,$username,$access_token, $access_secret, $profile_image));
     }
     else {
 ?>
