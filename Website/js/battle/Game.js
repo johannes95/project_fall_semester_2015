@@ -159,12 +159,64 @@ function hit2(newhp1, newhp2) {
 
 }
 
+/* dimensions for the player hpbar */
+var hpbar1 = {
+    x: 5,
+    y: 5,
+    width: 125,
+    height: 10
+};
+
+/* dimensions for the cpu hpbar */
+var hpbar2 = {
+    x: 170,
+    y: 5,
+    width: 125,
+    height: 10
+};
+
+/* method for drawing the hpbars and celebrity names */
 function drawHpBars(context) {
 	
-	context.fillStyle = "red";
-	context.fillText("HP:" + hp1 +"/"+originalhp1, positionP1+20, 10);
-	context.fillText("HP: " + hp2+"/"+originalhp2, positionP2+20, 10);
 	
+	var percent1 = hp1 / originalhp1; //percentage of life left
+	var percent2 = hp2 / originalhp2; 
+	
+	
+	/* draws both hp bars*/
+	context.fillStyle = "white"; 
+	context.fillRect(hpbar1.x-2, hpbar1.y-1, hpbar1.width+4, hpbar1.height+2);
+	context.fillRect(hpbar2.x-2, hpbar2.y-1, hpbar2.width+4, hpbar2.height+2);
+	
+	context.fillStyle = "red";
+	context.fillRect(hpbar1.x, hpbar1.y, hpbar1.width, hpbar1.height);
+	context.fillRect(hpbar2.x, hpbar2.y, hpbar2.width, hpbar2.height);
+	
+	context.fillStyle = "yellow";
+	context.fillRect(hpbar1.x + hpbar1.width * (1-percent1), hpbar1.y, hpbar1.width * percent1, hpbar1.height);
+	context.fillRect(hpbar2.x, hpbar2.y, hpbar2.width * percent2, hpbar2.height);
+	
+	/* draws player names*/
+	context.shadowColor="blue";
+	context.shadowBlur=5;
+	context.font="normal small-caps bolder 12px sans-serif";
+	context.textAlign="start";
+	context.fillText(playerCelebrity.name, hpbar1.x, hpbar1.y+20, hpbar1.width);
+	context.textAlign="end";
+	context.fillText(cpuCelebrity.name, hpbar2.x + hpbar2.width, hpbar2.y+20, hpbar2.width);
+	context.shadowBlur=0;
+	
+	/* draws KO textbox*/
+	context.fillStyle = "blue";
+	context.fillRect(130,3,40,14);
+	
+	context.fillStyle = "white";
+	context.font="normal small-caps bolder 14px sans-serif";
+	context.textAlign="center";
+	context.fillText("KO", 150, 15, 40);
+	
+	/* re-aligns context*/
+	context.textAlign="left";
 }
 
 var gameOverColor = 0,
