@@ -33,9 +33,9 @@ bridge_loop() ->
     terminate ->
       exit(normal);
     {terminate, Session, Pid} ->
-      io:format("***** ***** received: {terminate, ~p, ~p", [Session, Pid]), 
+      io:format("***** ***** received: {terminate, ~p, ~p ~n", [Session, Pid]), 
       ok = sendMsg(Session, "terminate", 0, 0, "terminate"),
-      io:format("***** ***** ~p ! {ok, terminated}", [Pid]), 
+      io:format("***** ***** ~p ! {ok, terminated}~n", [Pid]), 
       Pid ! {ok, terminated},
       bridge_loop();
     {battle, Session, Celeb, HP1, HP2, Tweet} -> 
@@ -48,7 +48,7 @@ sendMsg(Session, Celeb, HP1, HP2, Tweet) ->
         HP11 = integer_to_list(HP1),
         HP21 = integer_to_list(HP2),
         FormData = "session="++Session++"&attacker="++Celeb++"&hp1="++HP11++"&hp2="++HP21++"&tweet="++Tweet,
-        Url = "https://celebrity-database-killacann.c9users.io/Database/Battle.php",
+        Url = "https://celebrity-database-kikedaddy.c9users.io/Database/Battle.php",
         {ok, _ResponseNum, _Headers, Response}=ibrowse:send_req(Url, [{"Content-Type", "application/x-www-form-urlencoded"}], post, FormData),
         {[{_Success,Boolean}]} = jiffy:decode(Response),
         %1/0,

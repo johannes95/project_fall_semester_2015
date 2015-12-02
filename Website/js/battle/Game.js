@@ -14,9 +14,23 @@ var cpuCelebrity;
 var queue = Array();
 var DBTimer = 0;
 var session; //This is temporary until we get the session from the start button.
+var gameover;
+
 
 //Could do windows.onload = function(Session = getSession())
 function start(sess, celeb1, h1, celeb2, h2){
+	////KIKEDADDYO!!!
+    window.onbeforeunload = function(event) {
+    	if (!gameover)
+        	event.returnValue = "If you leave it will count as a loss.";
+    };
+    window.onunload = function(event) {
+		if (!gameover)
+        	updateStats("lost");
+        	cancelBattleBack();
+    };
+    
+	gameover = false;
 	session=sess;
 	originalhp1 = h1;
 	originalhp2 = h2;
@@ -38,7 +52,7 @@ function start(sess, celeb1, h1, celeb2, h2){
 		function() {
 		    update();	 // Update the game properties
 		    draw(board); // Draw with the updated properties
-		    if(DBTimer++ == 100) {
+		    if(DBTimer++ == 100 && !gameover) {
 		    	checkDB();
 		    	DBTimer =0;
 		    }
@@ -48,7 +62,7 @@ function start(sess, celeb1, h1, celeb2, h2){
 		    		console.log("Action available:");
 		    		console.log(action);
 		    		
-		    		if ('Attacker' in action) {
+		    		if (action.Attacker!="terminate") {
 		    			if (action.Attacker == playerCelebrity.name) {
 		    				hit1(action.HP1,action.HP2);
 		    				addTweet(playerCelebrity.name,"Hit " +  cpuCelebrity.name + ": </br>" + action.Tweet);
@@ -65,6 +79,7 @@ function start(sess, celeb1, h1, celeb2, h2){
 		    				playerCelebrity.name + " nor cpu: " + cpuCelebrity.name);
 		    			}
 		    		} else {
+		    			gameover = true;
 		    			alert("Server crashed");
 		    			location.reload();
 		    		}
@@ -102,8 +117,16 @@ function draw(board) {
 	
 	} else if(hp1 <= 0) {
 		gameOverText(context, 0);
+		if (!gameover) {
+			gameover = true;
+			updateStats("lost");
+		}
 	} else if(hp2 <= 0) {
 		gameOverText(context, 1);
+		if (gameover==false) {
+			gameover = true;
+			updateStats("win");
+		}
 	}
 	
 }
@@ -226,5 +249,20 @@ function addToQueue(object) {
 	}else{
 		console.log("Could not save action to queue");
 	}
-	
+}
+
+function updateStats(result){
+	var url =  urlStatistics;
+	var client1 = new XMLHttpRequest();
+	client1.open('GET', url+"?session="+session+"&result="+result+"", false);
+	client1.send();
+}
+
+function cancelBattleBack() {
+	var url = urlPhpBridge;
+	var params = "session="+session+"&Celeb1=terminate terminate&Hp1=99&Celeb2=terminate terminate&Hp2=99";
+	var http = new XMLHttpRequest();
+	http.open('POST', url, false);
+	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	http.send(params);
 }

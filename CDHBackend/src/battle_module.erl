@@ -71,8 +71,8 @@ battle_loop(Session, Celeb1, HP1, Celeb2, HP2) ->
         bridge ! {terminate, Session, self()},
         receive
           {ok, terminated} -> 
-            io:format("***** received: {ok, terminated}"),
-            io:format("broadcaster ! {ok, ~p}", [self()]), 
+            io:format("***** received: {ok, terminated}~n"),
+            io:format("broadcaster ! {ok, ~p}~n", [self()]), 
             broadcaster ! {ok, self()}
         end
     end.

@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 include_once ("functions.php");
 
     if (!empty($_POST)) {
@@ -8,7 +9,7 @@ include_once ("functions.php");
         $access_secret = $_POST['access_secret'];
         //$oauth_uid,$username,$oauth_token,$oauth_secret
         $db_user = new Users();
-        $db_user->checkUser($userid,$username,$access_token, $access_secret);
+        print_r( $db_user->checkUser($userid,$username,$access_token, $access_secret));
     }
     else {
 ?>

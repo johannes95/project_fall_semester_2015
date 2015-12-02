@@ -200,9 +200,9 @@ my_print(T) ->
       case extract(<<"text">>, L) of				%%Loss of data here, as good as fixed...
         {found, TT} -> 
           %parser ! {unicode:characters_to_list(TT, utf8)};"
-          parser ! {TT};
+          parser ! {TT},
           %TT2 = binary_to_list(TT),
-          %io:format("Tweets: ~ts~n", [TT]);		%%--ADDED LINE BREAK PLUS FUN-CALL
+          io:format("Tweets: ~ts~n", [TT]);		%%--ADDED LINE BREAK PLUS FUN-CALL
           %Temp1 = unicode:characters_to_list(TT, utf8),
           %Temp = lists:flatten(Temp1),
           %Temp = io_lib:format("~s", Temp1),

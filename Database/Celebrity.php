@@ -1,7 +1,7 @@
 <?php
-	header('Access-Control-Allow-Origin: *');	
+	header('Access-Control-Allow-Origin: *');
 	$ip = "0.0.0.0";
-	$user = getenv('C9_USER'); //Define database username
+	$user = "kikedaddy";
 	$db = "CelebDeath";
 	
 	if (!empty($_GET)) {
@@ -25,6 +25,7 @@
 			}
 			$result['celebs'] = $celebarray;
 		}
+		mysqli_close($connection);
 		//Returns an array with celebs in the format $celebarray['Handle1-n']
 		echo json_encode($result);
 	}

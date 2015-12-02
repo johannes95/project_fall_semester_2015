@@ -29,25 +29,11 @@
         <script type="text/javascript"> 
             var urlCelebData = "<?= $getCelebDataURL ?>";
             var urlPhpBridge = "<?= $getPhpBridgeURL ?>";
+            var urlStatistics = "<?= $getStatisticsURL ?>";
         </script>
         
         <script src="js/battle/TweetVisualization.js" type="text/javascript" charset="utf-8"></script>
-<!-- 
-        <div id="game">
-            <canvas id="board"></canvas>
-            <div id="tweetWrapper"></div>
-        </div>
         
-        <form action="https://project-fall-semester-2015-kikedaddy-1.c9.io/CDHBackend/erlang-php-bridge.php" method="post" accept-charset="UTF-8">
-            <input id="session" type="hidden" value=<?php echo session_id(); ?> name="session"/>
-            <input id="Celeb1" type="hidden" value="Cristiano Ronaldo" name="Celeb1"/>
-            <input id="Hp1" type="hidden" value=10 name="Hp1"/>
-            <input id="Celeb2" type="hidden" value="Kim Kardashian" name="Celeb2"/>
-            <input id="Hp2" type="hidden" value=10 name="Hp2"/>
-            <input id="start" type="submit" value="Start"/>
-        </form>
-            
--->
         <input id="hit1" type="button" value="Hit" />
         <input id="hit2" type="button" value="Hit" />
 

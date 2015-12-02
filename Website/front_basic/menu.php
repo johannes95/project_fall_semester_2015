@@ -20,8 +20,8 @@
                 case "index.php":
                     $("#nav-item-index").addClass("current-link");
                     break;
-                case "characters.php":
-                    $("#nav-item-characters").addClass("current-link");
+                case "battlehistory.php":
+                    $("#nav-item-battlehistory").addClass("current-link");
                     break;
                 default:
                     alert("unknown menu item, check menu.php");
@@ -41,8 +41,8 @@
     	?>
         	 <!-- Menu Item Battle -->
             <div id="nav-item-battle" class="nav-item"><a href="battle.php" >Battle</a></div>
-    	    <!-- Menu Item Character -->
-    	    <div id="nav-item-characters" class="nav-item"><a href="characters.php" >My character</a></div>
+    	    <!-- Menu Item Battle History -->
+    	    <div id="nav-item-battlehistory" class="nav-item"><a href="battlehistory.php" >Battle History</a></div>
             <!-- Menu Item Logout -->
             <div class="nav-item"><a href="front_basic/logout.php?logout">Logout</a></div>
     	<?php

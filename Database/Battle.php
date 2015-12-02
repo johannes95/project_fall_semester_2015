@@ -10,31 +10,45 @@
 	//GET is used by the front end to retrieve values from the database queue
     if(!empty($_GET))
     {
-        $session = $_GET['session']; //Gets the username under which the search will be performed.
-        
-		//Connect databse
-		$con = mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName,$dbport);
-		if(mysqli_connect_errno()){
-			$result["success"] = false;
-		}else{
-			// Select all rows for that current session
-		    $sql = "SELECT * FROM queue WHERE Session = '".$session."'";
-			$prevQuery = mysqli_query($con,$sql);
-			if(mysqli_num_rows($prevQuery) > 0) {
-    		    $result = mysqli_fetch_all($prevQuery, MYSQLI_ASSOC);
-    		    foreach ($result as $row) {
-    		    	//Delete all rows that were retrieved
-    		    	mysqli_query($con, "DELETE FROM queue where Session='".$session."' AND Attacker='".$row["Attacker"]."' AND HP1='".$row["HP1"]."' AND HP2='".$row["HP2"]."' AND Date= '".$row["Date"]."'");
-    		    }
-    		    $result["success"] = true;
-			} else {
-			    $result["success"] = false;
+    	$session = $_GET['session']; //Gets the username under which the search will be performed.
+    	if ($_GET['action'] == "empty")
+    	{
+    		$con = mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName,$dbport);
+    		if(mysqli_connect_errno()){
+				$result["success"] = false;
+			}else{
+	    		mysqli_query($con, "DELETE FROM queue where Session='".$session."'");
+	    		$result["success"] = true;
 			}
-			// Close connection
-        mysqli_close($con);
-        //return Json representation of the result
-    	echo json_encode($result);
-		}
+			mysqli_close($con);
+			echo json_encode($result);
+    	}
+    	else {
+	        $session = $_GET['session']; //Gets the username under which the search will be performed.
+			//Connect databse
+			$con = mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName,$dbport);
+			if(mysqli_connect_errno()){
+				$result["success"] = false;
+			}else{
+				// Select all rows for that current session
+			    $sql = "SELECT * FROM queue WHERE Session = '".$session."'";
+				$prevQuery = mysqli_query($con,$sql);
+				if(mysqli_num_rows($prevQuery) > 0) {
+	    		    $result = mysqli_fetch_all($prevQuery, MYSQLI_ASSOC);
+	    		    foreach ($result as $row) {
+	    		    	//Delete all rows that were retrieved
+	    		    	mysqli_query($con, "DELETE FROM queue where Session='".$session."' AND Attacker='".$row["Attacker"]."' AND HP1='".$row["HP1"]."' AND HP2='".$row["HP2"]."' AND Date= '".$row["Date"]."'");
+	    		    }
+	    		    $result["success"] = true;
+				} else {
+				    $result["success"] = false;
+				}
+				// Close connection
+	        mysqli_close($con);
+	        //return Json representation of the result
+	    	echo json_encode($result);
+			}
+    	}
     }
     //POST is used by the back end to post values into the database queue
     else if(!empty($_POST))
@@ -85,6 +99,9 @@
 		
         <h1>Test for Get</h1> 
 		<form action="Battle.php" method="get">     
+			action:<br /> 
+            <input type="text" name="action" placeholder="action" value="" /> 
+            <br />
              session2:<br /> 
             <input type="text" name="session" placeholder="session2" value="" /> 
             <br />

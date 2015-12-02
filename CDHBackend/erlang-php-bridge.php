@@ -52,19 +52,6 @@ if (!empty($_POST)) {
   }
   echo json_encode($response);
 }
-// else if(!empty($_GET['error'])) {
-//   //HARD CODED HERE!!!!
-//   echo '<script src="https://frontend-killacann.c9users.io/Website/js/battle/Game.js">'
-//     , 'addToQueue("crash");'
-//     , '</script>';
-              
-//   echo '<script type="text/javascript" charset="utf-8">'
-//     , 'console.log("Error cought");'
-//     ,'</script>';
-              
-//   echo '<html><body><h1>'.$_GET['error'].'</h1></body></html>';
-  
-// }
 else {
 ?>
  <h1>Test</h1> 
