@@ -3,7 +3,7 @@
 var board;
 var character, character2;
 var width = 300, height = 150;
-var chosenCelebrity, cpuCelebrity;
+var cpuCelebrity;
 var hp1, hp2;
 var originalhp1, originalhp2;
 var positionP1 = 0;
@@ -91,17 +91,7 @@ function start(sess, celeb1, h1, celeb2, h2){
 		}, 45			 // Each function is called 30 times per second
 	);
 	// End Game loop
-
-    document.getElementById("hit1").onmousedown = function() {
-        hit1(hp1, hp2-1);
-        addTweet(playerCelebrity.name,"Hit " + "@" + cpuCelebrity.name + " heeyoooo");
-    }
-
-    document.getElementById("hit2").onmousedown = function() {
-        hit2(hp1-1, hp2);
-        addTweet(cpuCelebrity.name,"Hit " + "@" + playerCelebrity.name + "heeyoooo");
-    }
-
+	
 };
 
 function draw(board) {
