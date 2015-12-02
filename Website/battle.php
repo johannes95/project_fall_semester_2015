@@ -33,9 +33,6 @@
         </script>
         
         <script src="js/battle/TweetVisualization.js" type="text/javascript" charset="utf-8"></script>
-        
-        <input id="hit1" type="button" value="Hit" />
-        <input id="hit2" type="button" value="Hit" />
 
 <?php
 
