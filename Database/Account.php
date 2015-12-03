@@ -15,19 +15,19 @@
 			
 	}
 	else{
-	    $query = "SELECT battles_won, battles_lost FROM users WHERE oauth_uid = '".$session."'";	//Retrieve the appropriate columns from the users table.
+	    $query = "SELECT * FROM users WHERE oauth_uid = '".$session."'";	//Retrieve the appropriate columns from the users table.
 	  	$results = mysqli_query($connection, $query);
 	  	
 	  	while($row = mysqli_fetch_assoc($results)) {
-			$answer = $row['battles_won']."L".$row['battles_lost'];		//A string is made with the data
+			
+			//$answer = $row['battles_won']."L".$row['battles_lost'];		//A string is made with the data
+			
+			$ans = array('battles_won' => $row['battles_won'],
+						 'battles_lost' => $row['battles_lost'],
+						 'picture' => $row['picture']);
 	  		
-	  		echo $answer;		//Data is returned to the front end.
+	  		echo json_encode($ans);		//Data is returned to the front end.
 	  		
 	  	}
 	}
 ?>
-	
-
-	
-
-	

@@ -3,9 +3,18 @@ label > input{ /* HIDE RADIO */
 }
 label > input + img{ /* IMAGE STYLES */
   cursor:pointer;
-  border:2px solid #000000;
+  border:2px solid transparent;
 }
 label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
   border:2px solid #f00;
 }
 
+
+button {
+  border-radius: 7px;
+  background-color: #658ce5;
+  font-family:'Indie Flower', cursive;
+  margin-left: 490px;
+  margin-right: auto;
+  font-weight:bold;
+}

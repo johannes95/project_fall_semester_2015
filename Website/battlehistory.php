@@ -14,29 +14,59 @@
 	curl_setopt($ch, CURLOPT_POST, true);  // tell curl you want to post something
 	curl_setopt($ch, CURLOPT_POSTFIELDS, "session=".$my_session); // define the url to be posted
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // return the output in string format
-	$output = curl_exec($ch); //string, format: "xxLyy" where xx is the number of wins and yy is the number of losses, "L" is the breaker
+	$encodedOutput = curl_exec($ch); //string, format: "xxLyy" where xx is the number of wins and yy is the number of losses, "L" is the breaker
 	curl_close ($ch); // close curl handle 
 	
-	//echo print($output);
-	$L_pos = strpos($output,"L"); //position of 'L' in $output string so that we know where the losses is located.
-	$won = substr($output,0,$L_pos); // a new string is made from the 1st index up to the position of L(this is a string of the total number of wins)
-	$lost = substr($output,$L_pos+1); // a string is also made for the number of losses, starting from after the "L" 
+	$output = json_decode(trim($encodedOutput), TRUE);
+	
+	//Extract values for win/loss and picture URL
+	$won = $output['battles_won'];
+	$lost = $output['battles_lost'];
+	$pic = $output['picture'];
+	
 	$total = $won+$lost;	// total number of battles fought
+	
+	
+	
 	if ($total > 0)
 		$winpercent = round(($won/$total*100), 2);	// win% of all battles (rounded up to 2 dp)
 	else
 		$winpercent = 0;
 
-	
+	if (!isset($won) || !isset($lost)) {
+		echo '
+			<section>
+				<div id="character-list" <div style="margin:20 auto;">
+					<br>
+					<a>Could not fetch battle info!</a>
+					<br>
+				</div>
+			</section>';
+	} else if (!isset($pic)) {
+		echo '
+			<section>
+				<div id="character-list" <div style="margin:20 auto;">
+					<br>
+					<a>Could not fetch profile picture!</a>
+					<br>
+				</div>
+			</section>';
+	}
 ?>                
     
     <section>
  
         
         <div id="character-list"  <div style="margin:20 auto;">
-        	<selection> Battles fought: <?php   echo $total ?>  </selection>
-            <selection> Battles won:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php   echo $won ?> </selection>
-            <selection> Win%:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <?php  echo $winpercent ?>%</selection>
+        	
+        	<a id="B_F_T"> Battles fought: </a>		<a id ="B_Fought"><?php   echo $total ?>  		</a><br>
+            <a id="B_W_T"> Battles won:    </a>		<a id ="B_Won"><?php   echo $won ?> 	   		</a><br>
+            
+            <img id="Profile_Pic" src="<?php echo $pic; ?>" alt="Profile Picture" style="width:120px;height:88px;">
+            
+            <a id="B_P_T"> Win%: 		   </a>		<a id="B_Percent"><?php  echo $winpercent ?>% 	</a>
+            
+        </div>
             
     </section>
     

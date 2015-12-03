@@ -61,6 +61,52 @@ nav{
     color:#696969;
 }
 
+#Profile_Pic {
+    margin-left: 35em;
+    margin-right: auto;
+}
+
+/*
+    Section for BattleHistory stylesheet
+*/
+
+#B_W_T {
+    font-size: 30;
+    margin-left: 4em;
+}
+
+#B_Won {
+    font-size: 30;
+    margin-left:1em;
+}
+
+
+#B_F_T {
+    font-size: 30;
+    margin-left: 4em;
+}
+
+#B_Fought {
+    font-size: 30;
+    margin-left:1em;
+}
+
+
+#B_P_T {
+    font-size: 30;
+    margin-left: 4em;
+}
+
+#B_Percent {
+    font-size: 30;
+    margin-left:1em;
+}
+
+/*
+    End of section
+*/
+
+
 #logo {
     float:left;
     padding-left:15px;
