@@ -15,6 +15,8 @@ var queue = Array();
 var DBTimer = 0;
 var session; //This is temporary until we get the session from the start button.
 var gameover;
+var temphp1;
+var temphp2;
 
 
 //Could do windows.onload = function(Session = getSession())
@@ -57,7 +59,7 @@ function start(sess, celeb1, h1, celeb2, h2){
 		    	checkDB();
 		    	DBTimer =0;
 		    }
-		    if (character.x == positionP1 && character2.x == positionP2)
+		    if (character.x == positionP1 && character2.x == positionP2) {
 		    	if (queue.length > 0) {
 		    		var action = getQueueItem();
 		    		console.log("Action available:");
@@ -81,12 +83,12 @@ function start(sess, celeb1, h1, celeb2, h2){
 		    			}
 		    		} else {
 		    			gameover = true;
-		    			alert("Server crashed");
-		    			location.reload();
-		    		}
-		    		
-
-		    	}
+						alert("Server crashed");
+						location.reload();
+					}
+				}
+			}
+		    
 		    										// Do whatever is in variable action (depends on how johannes queued)
 		}, 45			 // Each function is called 30 times per second
 	);
@@ -99,10 +101,13 @@ function draw(board) {
 	var context = board.getContext("2d"); // Get the context to draw on
 	context.clearRect(0,0,width,height);  // Clear the screen
 	
-	if(hp1 > 0 && hp2 > 0) {
+	if((hp1 > 0 && hp2 > 0) || character.x != positionP1 || character2.x != positionP2) {
 		character.draw(context);			  // Draw the character on the screen
 		character2.draw(context);
-		
+		if (character.x+character.width == positionP2+25 || character2.x == positionP1+50) {
+			hp1 = temphp1;
+			hp2 = temphp2;
+		}
 		drawHpBars(context);
 		// draw tweets
 	
@@ -111,12 +116,14 @@ function draw(board) {
 		if (!gameover) {
 			gameover = true;
 			updateStats("lost");
+			reset(gameover);
 		}
 	} else if(hp2 <= 0) {
 		gameOverText(context, 1);
 		if (gameover==false) {
 			gameover = true;
 			updateStats("win");
+			reset(gameover);
 		}
 	}
 	
@@ -133,20 +140,24 @@ function hit1(newhp1,newhp2) {
 	// makes sure that only one character can hit at a time and doesn't double hit
 	if(character.x == positionP1 && character2.x == positionP2) {
 		character.hit();
-		hp1 = newhp1;
-		hp2 = newhp2;
+		temphp1 = newhp1;
+		temphp2 = newhp2;
+		console.log("hit1");
+		console.log("temphp1 = "+temphp1);
+		console.log("temphp2 = "+temphp2);
 	}
-	
 }
 
 function hit2(newhp1, newhp2) {
 	// makes sure that only one character can hit at a time and doesn't double hit
 	if(character.x == positionP1 && character2.x == positionP2) {
 		character2.hit();
-		hp1 = newhp1;
-		hp2 = newhp2;
+		temphp1 = newhp1;
+		temphp2 = newhp2;
+		console.log("hit2");
+		console.log("temphp1 = "+temphp1);
+		console.log("temphp2 = "+temphp2);
 	}
-
 }
 
 /* dimensions for the player hpbar */
@@ -308,4 +319,19 @@ function cancelBattleBack() {
 	http.open('POST', url, false);
 	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	http.send(params);
+}
+
+function reset(askUserFirst){
+	var phrase = "Good job, wanna play again?";
+
+	if(askUserFirst){
+
+		if(confirm(phrase)){
+			location.reload();
+		}else{
+			location.href = "index.php"
+		}
+	}else{
+		location.reload();
+	}
 }

@@ -34,6 +34,7 @@
         
         <script src="js/battle/TweetVisualization.js" type="text/javascript" charset="utf-8"></script>
 
+
 <?php
 
     include("front_basic/footer.php"); 

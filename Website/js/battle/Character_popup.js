@@ -1,8 +1,10 @@
+var chosen;
+
 // Loads main variables needed for this file.
 function load_info() {
 	var head  = document.getElementsByTagName('head')[0];
 	var link  = document.createElement('link');
-	var chosen;
+	chosen = "none";
 	link.rel  = 'stylesheet';
 	link.type = 'text/css';
 	link.href = 'css/select_char.css';
@@ -103,7 +105,7 @@ function createButton(session, response) {
 	btn.setAttribute("id","Button")
 	//Add listener to the button.
 	btn.addEventListener("click", function(){
-		if (chosen!=undefined) {
+		if (chosen!="none") {
 			var answer = randomizer(chosen.name, response.celebs);
 			console.log("after gotten the answer");
 			console.log(answer);
@@ -113,8 +115,9 @@ function createButton(session, response) {
 
 			//Start battle in the back end.
 			startBattleBackend(session, answer);
-		} else //No character has been chosen.
-			alert("You must choose a character")
+		} else { //No character has been chosen.
+			alert("You must choose a character");
+		}
 	});
   var t = document.createTextNode("Select");
   btn.appendChild(t);

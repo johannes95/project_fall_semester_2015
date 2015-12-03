@@ -3,12 +3,11 @@ label > input{ /* HIDE RADIO */
 }
 label > input + img{ /* IMAGE STYLES */
   cursor:pointer;
-  border:2px solid transparent;
+  border:2px solid #000000;
 }
 label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
   border:2px solid #f00;
 }
-
 
 button {
   border-radius: 7px;
@@ -17,4 +16,4 @@ button {
   margin-left: 490px;
   margin-right: auto;
   font-weight:bold;
-}
+} 
