@@ -68,12 +68,12 @@ function start(sess, celeb1, h1, celeb2, h2){
 		    		if (action.Attacker!="terminate") {
 		    			if (action.Attacker == playerCelebrity.name) {
 		    				hit1(action.HP1,action.HP2);
-		    				addTweet(playerCelebrity.name,"Hit " +  cpuCelebrity.name + ": </br>" + action.Tweet);
+		    				addTweet(playerCelebrity.name, action.Tweet);
 		    				//This is where we need to do the hp as well and the tweet
 		    			}
 		    			else if (action.Attacker == cpuCelebrity.name) {
 		    				hit2(action.HP1,action.HP2);
-		    				addTweet(cpuCelebrity.name,"Hit " +  playerCelebrity.name + ": </br>" + action.Tweet);
+		    				addTweet(cpuCelebrity.name,  action.Tweet);
 		    				//This is where we need to do the hp as well and the tweet
 		    			}
 		    			else
