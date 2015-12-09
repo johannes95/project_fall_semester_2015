@@ -2,9 +2,9 @@
 var active = false;
 var firstSlide = true;
 var lastImage = false;
-var animSwitch = false;
 var interval;
-var images = ["url('img/sign_in/celebs.jpg')","url('img/celebs/beyonce.jpg')","url('img/celebs/donaldjtrump.jpg')","url('img/celebs/justinbieber.jpg')","url('img/celebs/kimkardashian.jpg')","url('img/celebs/martinamcbride.jpg')","url('img/celebs/obama.jpg')","url('img/celebs/timcook.jpg')"];
+var images = ["","url('img/slider/slider2.png')","",""];
+var strings = ["<span style='display:table-cell; vertical-align:middle;'>Welcome<br/>to<br/>CelebrityDeath#!</span>", "A game of tweets.", "<span style='display:table-cell; vertical-align:middle;'>Choose your favorite celebrity.</span>", "<span style='display:table-cell; vertical-align:middle;'>Sign in to play.</span>"];
 var lastIndex = -1;
 var div1, div2;
 
@@ -17,28 +17,17 @@ window.onload = function() {
    
     // Initialize the first div with the first image
     div1.style.backgroundImage = images[lastIndex+1];
+    div1.innerHTML = strings[lastIndex+1];
     lastIndex++; // Keeps track of the last image that was loaded
    
     // Set an interval for calling the slide effect once every five seconds
     setInterval(function(){
        nextImage();                   // Switch the divs and load the next image
        if(!lastImage) {
-         if(!animSwitch) {
-            if(lastIndex % 2 == 0) {
-               slideOut(div1, div2, "right"); // Slide from div1 to div2(div1 slides out to the right)
-               animSwitch = true;
-            }
-            else {
-               slideIn(div1, div2, "left");
-            }
+         if(lastIndex % 2 == 0) {
+            slideIn(div1, div2, "left");
          } else {
-            if(lastIndex % 2 == 0) {
-               slideOut(div1, div2, "bottom"); // Slide from div1 to div2(div1 slides out to the right)
-               animSwitch = false;
-            }
-            else {
-               slideIn(div1, div2, "top");
-            }
+            slideIn(div1, div2, "top");
          }
        } else {
           fadeTo(div1, div2);
@@ -70,6 +59,7 @@ function nextImage() {
     console.log("Array length: " + images.length);
     
     div2.style.backgroundImage = images[lastIndex+1];
+    div2.innerHTML = strings[lastIndex+1];
     lastIndex++;
     
 }
@@ -108,67 +98,21 @@ function slideIn(element1, element2, direction) {
             break;
       }
       
+      element1.style[direction] = "auto";
+      
       element2.style[direction] = "auto"; // Set the opposite property to auto(so that it doesn't get stuck)
       element2.style[property] = element2[initialValue]; // Set the css property to the initial value
       
       interval = setInterval( // Interval for doing the animation
          function() {
-            if(parseInt(element2.style[property]) > 0) // Until it reaches its position
-               element2.style[property] = parseInt(element2.style[property]) - 2; // Make the animation
-            else
+            if(parseInt(element2.style[property]) > 0) { // Until it reaches its position
+               element2.style[property] = parseInt(element2.style[property]) - 2;
+               element1.style[property] = parseInt(element1.style[property]) - 2; // Make the animation
+            } else
                active = false;
          }, 1); // 1000 times per second(every millisecond)
       
    }
-}
-
-function slideOut(element1, element2, direction) {
-   
-   if(!active) { // If no other effect is active
-      
-      active = true; // Set effects to active(flag)
-      reset(element1, element2); // Reset the css properties
-      
-      element1.style.zIndex = "1"; // Set the "old" element to be on top
-      element2.style.zIndex = "0"; // Set the "new" element to be underneath
-      
-      var property; // The css property to be changed
-      var initialValue; // The initial value of the property(outside of slider)
-      
-      switch(direction) { // Switch case for choosing css property and initial value
-         case "top":
-            property = "bottom";
-            initialValue = "offsetHeight";
-            break;
-         case "right":
-            property = "left";
-            initialValue = "offsetWidth";
-            break;
-         case "bottom":
-            property = "top";
-            initialValue = "offsetHeight";
-            break;
-         case "left":
-            property = "right";
-            initialValue = "offsetWidth";
-            break;
-         default:
-            break;
-      }
-      
-      element1.style[direction] = "auto"; // Set the opposite property to auto(so that it doesn't get stuck)
-      element1.style[property] = 0; // Set the css property to the initial value
-      
-      interval = setInterval( // Interval for doing the animation
-         function() {
-            if(parseInt(element1.style[property]) < parseInt(element1[initialValue])) // Until it reaches its position
-               element1.style[property] = parseInt(element1.style[property]) + 2; // Make the animation
-            else
-               active = false;
-      }, 1); // 1000 times per second(every millisecond)
-      
-   }
-	
 }
 
 function fadeTo(element1, element2) {

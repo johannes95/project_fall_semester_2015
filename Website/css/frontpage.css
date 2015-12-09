@@ -1,0 +1,160 @@
+@charset "utf-8";
+
+html, body {
+    background:#34495e;
+    margin:0;
+    padding:0;
+}
+
+#wrapper {
+    width:100%;
+    height:100%;
+}
+
+header {
+    width:100%;
+    height:15%;
+    background:#FFF;
+    text-align:center;
+}
+
+header #logo {
+    font-family:'Indie Flower', cursive;
+    font-size:3em;
+    height:70%;
+}
+
+header a {
+    height:30%;
+}
+
+#main {
+    width:100%;
+    height:80%;
+}
+
+    /* SLIDER */
+#slider {
+    margin:auto;
+    width:100%;
+    height:100%;
+    position:relative;
+    overflow:hidden;
+}
+
+#image1 {
+    background: no-repeat center center;
+    width:100%;
+    height:100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    display:table;
+    
+    /* To make the size adjust */
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	color:white;
+	font-size:10em;
+	font-family:sans-serif;
+	text-align:center;
+	text-shadow: 10px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+#image2 {
+    background: no-repeat center center;
+    width:100%;
+    height:100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    display:table;
+    
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	color:white;
+	font-size:10em;
+	font-family:sans-serif;
+	text-align:center;
+	text-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
+}
+    /* END Slider */
+
+footer {
+    width:100%;
+    height:5%;
+    text-align:center;
+    position:absolute;
+}
+
+/*---------------Low height(resolution)---------------*/
+@media only screen and (max-height:800px) {
+    #image1 {
+        font-size:5em;
+    }
+    
+    #image2 {
+        font-size:5em;
+    }
+
+}
+
+/*---------------Low width(resolution)---------------*/
+@media only screen and (max-width:1024px) {
+    
+    #image1 {
+        font-size:3em;
+    }
+    
+    #image2 {
+        font-size:3em;
+    }
+    
+    header #logo {
+        font-size:2em;
+    }
+    
+    header a img {
+        width:110; 
+        height:16;
+        border:0;
+    }
+    
+}
+
+/*---------------Low-low width(resolution)---------------*/
+@media only screen and (max-width:600px) { 
+    
+    #image1 {
+        font-size:2em;
+    }
+    
+    #image2 {
+        font-size:2em;
+    }
+
+}
+
+/*---------------Lowest width(resolution)---------------*/
+@media only screen and (max-width:240px) { 
+    
+    header #logo {
+        font-size:1em;
+    }
+    
+    header a img {
+        width:70; 
+        height:8;
+        border:0;
+    }
+}
+    
+}
