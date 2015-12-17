@@ -154,7 +154,7 @@ function startBattleBackend(session, answer) {
 			console.log("This is the session:" + session);
 			
 			//Remove pictures and load canvas
-			correctGraphics();
+			correctGraphics(answer.name);
 					
 			//Start the battle in the front end
 			start(session, chosen.name, chosen.hp, answer.name, answer.hp);
@@ -166,11 +166,12 @@ function startBattleBackend(session, answer) {
 }
 
 //Removes the pictures and creates the Canvas and the twitter wrapper when the battle is about to start.
-function correctGraphics() {
+function correctGraphics(compplayer) {
 	var elem = document.getElementById('Pictures');
 	//Removes the pictures from the site.
 	elem.parentNode.removeChild(elem);
 	var div = document.getElementById("game");
+	
 	//Initiate a canvas.
 	var canvas = document.createElement("CANVAS");
 	canvas.setAttribute("id", "board");
@@ -179,4 +180,14 @@ function correctGraphics() {
 	divtweeter.setAttribute("id", "tweetWrapper");
 	div.appendChild(canvas);
 	div.appendChild(divtweeter);
+	var firstName;
+    var lastName;
+	 for (var i = 0; i < compplayer.length; i++) {
+        if (compplayer[i] === ' ') {
+            firstName = compplayer.substring(0,i);
+            lastName = compplayer.substring(i+1,compplayer.length);
+        }
+    }
+    var celeburl = firstName + lastName;
+	div.style.backgroundImage= "url('img/"+celeburl+".jpg')";
 }

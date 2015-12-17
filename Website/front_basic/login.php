@@ -32,11 +32,12 @@ if(isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_t
 		//Handle the DB in the other server.
 		//HARD CODED!!!
 		$url = $getUserDataURL;
+		$profilepic = str_replace("_normal.jpg",".jpg",$user_info->profile_image_url);
 
 		$fields = array(
 			'userid' => $user_info->id,
 			'username' => $user_info->screen_name,
-			'profile_image' => $user_info->profile_image_url,
+			'profile_image' => $profilepic,
 			'access_token' => $access_token['oauth_token'],
 			'access_secret' => $access_token['oauth_token_secret']
 		);

@@ -23,7 +23,7 @@ class Users {
 	function checkUser($oauth_uid,$username,$oauth_token,$oauth_secret, $profile_image_url){
 		$prevQuery = mysqli_query($this->connect,"SELECT * FROM $this->tableName WHERE oauth_uid = '".$oauth_uid."'") or die(mysqli_error($this->connect));
 		if(mysqli_num_rows($prevQuery) > 0){
-			$update = mysqli_query($this->connect,"UPDATE $this->tableName SET oauth_token = '".$oauth_token."', oauth_secret = '".$oauth_secret."', modified = '".date("Y-m-d H:i:s")."' WHERE oauth_uid = '".$oauth_uid."'") or die(mysqli_error($this->connect));
+			$update = mysqli_query($this->connect,"UPDATE $this->tableName SET oauth_token = '".$oauth_token."', oauth_secret = '".$oauth_secret."', username = '".$username."', picture = '".$profile_image_url."', modified = '".date("Y-m-d H:i:s")."' WHERE oauth_uid = '".$oauth_uid."'") or die(mysqli_error($this->connect));
 		}else{
 			$insert = mysqli_query($this->connect,"INSERT INTO $this->tableName SET oauth_uid = '".$oauth_uid."', username = '".$username."', oauth_token = '".$oauth_token."', oauth_secret = '".$oauth_secret."', picture = '".$profile_image_url."', created = '".date("Y-m-d H:i:s")."', modified = '".date("Y-m-d H:i:s")."'") or die(mysqli_error($this->connect));
 		}

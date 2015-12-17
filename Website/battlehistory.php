@@ -23,7 +23,7 @@
 	$won = $output['battles_won'];
 	$lost = $output['battles_lost'];
 	$pic = $output['picture'];
-	
+	$username = "@".$output['username'];
 	$total = $won+$lost;	// total number of battles fought
 	
 	
@@ -58,12 +58,9 @@
  
         
         <div id="character-list"  <div style="margin:20 auto;">
-        	
+        	<a id="B_UN"><?php   echo $username ?> <img id="Profile_Pic" src="<?php echo $pic; ?>" alt="Profile Picture" style="width:150px;height:150px;"> </a><br><br>
         	<a id="B_F_T"> Battles fought: </a>		<a id ="B_Fought"><?php   echo $total ?>  		</a><br>
             <a id="B_W_T"> Battles won:    </a>		<a id ="B_Won"><?php   echo $won ?> 	   		</a><br>
-            
-            <img id="Profile_Pic" src="<?php echo $pic; ?>" alt="Profile Picture" style="width:120px;height:88px;">
-            
             <a id="B_P_T"> Win%: 		   </a>		<a id="B_Percent"><?php  echo $winpercent ?>% 	</a>
             
         </div>

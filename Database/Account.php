@@ -24,6 +24,7 @@
 			
 			$ans = array('battles_won' => $row['battles_won'],
 						 'battles_lost' => $row['battles_lost'],
+						 'username' => $row['username'],
 						 'picture' => $row['picture']);
 	  		
 	  		echo json_encode($ans);		//Data is returned to the front end.
