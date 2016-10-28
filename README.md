@@ -11,19 +11,19 @@ Hits are based on live Twitter data - every time your celebrity is mentioned, yo
 ## QuickStart
 ### HOW TO MAKE A COPY OF THE PROJECT:
 
-**1. Create three workspaces called:**
-	- frontend
-	- backend
-	- celebrity-database
+#### 1. Create three workspaces called:
+- frontend
+- backend
+- celebrity-database
 
-**2 - Clone the repo**
+#### 2. Clone the repo
 
-** 3 - Inside you will find these instructions and 3 folders: **
+#### 3. Inside you will find these instructions and 3 folders:
  - CDHBackend (this is to go to the backend workspace) 
  - Database (this is to go to the celebrity-database workspace)
  - website (this is to go to the frontend workspace).
 
-** 4 - Drag and drop each folder into its appropriate workspace. **
+#### 4. Drag and drop each folder into its appropriate workspace.
 
-** 5 - Each workspace will contain a readme.md file ** 
+#### 5. Each workspace will contain a readme.md file
 With appropriate instructions on how to get that space to work appropriately.
